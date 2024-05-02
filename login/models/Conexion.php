@@ -2,8 +2,8 @@
 
 class Conexion {
     private $host = "localhost";
-    private $user = "root";
-    private $password = "root"; 
+    private $user = "admin";
+    private $password = "0ff42d8a24af5b106c0b0d5bfbda40dfb6d57e4f11434fa8"; 
     private $database = "logMVC";
 
     public function conectar() {

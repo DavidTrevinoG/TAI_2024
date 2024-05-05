@@ -68,10 +68,11 @@ class UniversidadController {
     public function eliminar() {
         $id = $_GET['id'];
         
-        if ($this->model->eliminarUniversidad($id)) {
+        try {
+            $this->model->eliminarUniversidad($id);
             echo "Universidad eliminada correctamente";
             header('Location: ./index.php?controller=UniversidadController&action=index');
-        }  else {
+        } catch (Exception $e) {
             // En caso de que la condición sea falsa, se mostrará un mensaje de error
             echo "<script>alert('No se pudo eliminar la universidad debido a que cuenta con carreras');</script>";
             echo "<script>window.location.href = './index.php?controller=UniversidadController&action=index';</script>";

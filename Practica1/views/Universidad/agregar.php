@@ -7,7 +7,7 @@ if(!isset($_SESSION['usuario'])){
 }
 ?>
 
-<!-- Formulario para agregar una universidad -->
+
 <div class="container mt-4" id="secon">
     <h2>Agregar Universidad</h2>
 

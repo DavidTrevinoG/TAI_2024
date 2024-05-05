@@ -11,7 +11,6 @@ if(!isset($_SESSION['usuario'])){
 <div class="container mt-4" id="secon">
     <h2>Editar Carrera</h2>
 
-    <!-- Formulario para editar una Carrera -->
     <form method="post" action="./index.php?controller=CarreraController&action=editar">
         <input type="hidden" name="id_carrera" value="<?php echo $carrera['id_carrera']; ?>">
         <div class="form-group">

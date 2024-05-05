@@ -10,7 +10,6 @@ if(!isset($_SESSION['usuario'])){
 <div class="container mt-4" id="secon">
     <h2>Agregar Carrera</h2>
 
-    <!--> Formulario para agregar una Carrera <-->
     <form method="post" action="./index.php?controller=CarreraController&action=agregar">
         <div class="form-group">
             <label for="nombre">Nombre:</label>

@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(0);
+
         // Si se envía el controlador y la acción por la URL
         if (isset($_GET['controller']) && isset($_GET['action'])) {
                 // Se obtienen los valores de controller y action

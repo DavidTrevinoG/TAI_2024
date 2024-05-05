@@ -1,4 +1,6 @@
 <?php
+
+error_reporting(0);
 class Conexion {
 
     // Atributos de la clase

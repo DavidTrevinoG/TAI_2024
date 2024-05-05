@@ -5,10 +5,12 @@ require_once 'Conexion.php';
 class Usuario {
     private $conexion;
 
+    // Constructor
     public function __construct() {
         $this->conexion = new Conexion();
     }
 
+    // Método para registrar un usuario
     public function registrar($usuario, $password) {
         $conexion = $this->conexion->conectar();
         $sql = "INSERT INTO users (username, password) VALUES ('$usuario','$password')";
@@ -20,6 +22,7 @@ class Usuario {
         }
     }
 
+    // Método para iniciar sesión
     public function login($usuario, $password) {
         $conexion = $this->conexion->conectar();
         $sql = "SELECT * FROM users WHERE username = '$usuario' AND password = '$password'";

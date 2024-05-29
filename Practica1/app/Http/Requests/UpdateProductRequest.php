@@ -22,11 +22,12 @@ class UpdateProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|string|max:50|unique:products,code,'.$this->product->id,
+            'code' => 'required|string|max:50|unique:products,code',
             'name' => 'required|string|max:250',
             'quantity' => 'required|integer|min:1|max:10000',
-            'price' => 'required',
-            'description' => 'nullable|string'
+            'price' => 'required|numeric|min:0', // Agrega validación numérica para el precio
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id' // Agrega esta línea
         ];
     }
 }

@@ -14,6 +14,12 @@ class Product extends Model
         'name',
         'quantity',
         'price',
-        'description'
+        'description',
+        'category_id' // Agrega este campo
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

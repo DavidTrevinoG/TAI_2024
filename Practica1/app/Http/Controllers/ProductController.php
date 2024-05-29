@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category; // Asegúrate de importar el modelo Category
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\View\View;
@@ -25,7 +26,8 @@ class ProductController extends Controller
      */
     public function create(): View
     {
-        return view('products.create');
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('products.create', compact('categories'));
     }
 
     /**
@@ -52,7 +54,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product): View
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('products.edit', compact('product', 'categories'));
     }
 
     /**

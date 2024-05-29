@@ -17,7 +17,6 @@
                     <h2 class="text-2xl font-semibold">Edit Product</h2>
                     <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
                 </div>
-
                 <form action="{{ route('products.update', $product->id) }}" method="post">
                     @csrf
                     @method("PUT")
@@ -63,10 +62,23 @@
                     </div>
 
                     <div class="mb-4">
-                        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update</button>
+                        <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
+                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('category_id') border-red-500 @enderror" id="category_id" name="category_id">
+                            @foreach($categories as $category)
+                            <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('category_id')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
                     </div>
 
+                    <div class="mb-4">
+                        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium  bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update</button>
+                    </div>
                 </form>
+
+
             </div>
         </div>
     </div>

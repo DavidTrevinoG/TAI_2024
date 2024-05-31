@@ -14,17 +14,8 @@
 
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="code" class="block text-sm font-medium text-gray-700"><strong>Code:</strong></label>
-                        <p class="mt-1">{{ $category->code }}</p>
-                    </div>
-
-                    <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Name:</strong></label>
                         <p class="mt-1">{{ $category->name }}</p>
-                    </div>
-                    <div class="col-span-2">
-                        <label for="description" class="block text-sm font-medium text-gray-700"><strong>Description:</strong></label>
-                        <p class="mt-1">{{ $category->description }}</p>
                     </div>
                 </div>
             </div>

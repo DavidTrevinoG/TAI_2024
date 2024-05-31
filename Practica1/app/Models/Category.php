@@ -10,13 +10,16 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = [
-        'code',
-        'name',
-        'description'
+        'name'
     ];
 
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function inventarios()
+    {
+        return $this->hasMany(Inventarios::class);
     }
 }

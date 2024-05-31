@@ -4,19 +4,25 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProductsTable extends Migration
+return new class extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
             $table->string('name');
-            $table->integer('quantity');
-            $table->decimal('price', 8, 2);
-            $table->text('description')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('cascade'); // Agrega esta línea
+            $table->unsignedBigInteger('category_id');
+            $table->decimal('precio_venta', 8, 2);
+            $table->decimal('precio_compra', 8, 2);
+            $table->date('fecha_anadido');
+            $table->string('color');
+            $table->string('descripcion_corta');
+            $table->string('descripcion_larga');
             $table->timestamps();
+            $table->foreign('category_id')
+                ->references('id')
+                ->on('categories')
+                ->onDelete('restrict');
         });
     }
 
@@ -24,4 +30,4 @@ class CreateProductsTable extends Migration
     {
         Schema::dropIfExists('products');
     }
-}
+};

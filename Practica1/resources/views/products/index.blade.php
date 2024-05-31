@@ -22,22 +22,31 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S#</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Quantity</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoría</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Venta</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Compra</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Añadido</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Corta</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Larga</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
+
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse ($products as $product)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $loop->iteration }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->code }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $product->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->quantity }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->price }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->category->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->precio_venta }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->precio_compra }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->fecha_anadido }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->color }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->descripcion_corta }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $product->descripcion_larga }}</td><!-- Mostrar el nombre de la categoría -->
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <form action="{{ route('products.destroy', $product->id) }}" method="post">
                                     @csrf
@@ -49,6 +58,7 @@
                             </td>
                         </tr>
                         @empty
+
                         <tr>
                             <td colspan="6" class="text-center">No products found.</td>
                         </tr>

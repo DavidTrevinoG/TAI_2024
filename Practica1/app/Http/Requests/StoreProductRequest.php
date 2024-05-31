@@ -22,12 +22,15 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => 'required|string|max:50|unique:products,code',
             'name' => 'required|string|max:250',
-            'quantity' => 'required|integer|min:1|max:10000',
-            'price' => 'required|numeric|min:0', // Agrega validación numérica para el precio
-            'description' => 'nullable|string',
-            'category_id' => 'required|exists:categories,id' // Agrega esta línea
+            'category_id' => 'required|exists:categories,id',
+            'precio_venta' => 'required|numeric|min:0',
+            'precio_compra' => 'required|numeric|min:0',
+            'fecha_anadido' => 'required|date',
+            'color' => 'required|string',
+            'descripcion_corta' => 'required|string',
+            'descripcion_larga' => 'required|string'
+            // Agrega esta línea
         ];
     }
 }

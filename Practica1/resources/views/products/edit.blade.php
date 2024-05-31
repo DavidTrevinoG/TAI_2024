@@ -22,14 +22,6 @@
                     @method("PUT")
 
                     <div class="mb-4">
-                        <label for="code" class="block text-sm font-medium text-gray-700">Code</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('code') border-red-500 @enderror" id="code" name="code" value="{{ $product->code }}">
-                        @error('code')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
                         <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                         <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('name') border-red-500 @enderror" id="name" name="name" value="{{ $product->name }}">
                         @error('name')
@@ -38,37 +30,61 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
-                        <input type="number" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('quantity') border-red-500 @enderror" id="quantity" name="quantity" value="{{ $product->quantity }}">
-                        @error('quantity')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
-                        <input type="number" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('price') border-red-500 @enderror" id="price" name="price" value="{{ $product->price }}">
-                        @error('price')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
-                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('description') border-red-500 @enderror" id="description" name="description">{{ $product->description }}</textarea>
-                        @error('description')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="category_id" class="block text-sm font-medium text-gray-700">Category</label>
+                        <label for="category_id" class="block text-sm font-medium text-gray-700">Categoría</label>
                         <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('category_id') border-red-500 @enderror" id="category_id" name="category_id">
                             @foreach($categories as $category)
                             <option value="{{ $category->id }}" {{ $product->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category_id')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="precio_venta" class="block text-sm font-medium text-gray-700">Precio Venta</label>
+                        <input type="number" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('precio_venta') border-red-500 @enderror" id="precio_venta" name="precio_venta" value="{{ $product->precio_venta}}">
+                        @error('precio_venta')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="precio_compra" class="block text-sm font-medium text-gray-700">Precio Compra</label>
+                        <input type="number" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('precio_compra') border-red-500 @enderror" id="precio_compra" name="precio_compra" value="{{ $product->precio_compra }}">
+                        @error('precio_compra')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="fecha_anadido" class="block text-sm font-medium text-gray-700">Fecha Añadido</label>
+                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_anadido') border-red-500 @enderror" id="fecha_anadido" name="fecha_anadido" value="{{ $product->fecha_anadido }}">
+                        @error('fecha_anadido')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="color" class="block text-sm font-medium text-gray-700">Color</label>
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('color') border-red-500 @enderror" id="color" name="color" value="{{ $product->color }}">
+                        @error('color')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="descripcion_corta" class="block text-sm font-medium text-gray-700">Descripción Corta</label>
+                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('descripcion_corta') border-red-500 @enderror" id="descripcion_corta" name="descripcion_corta">{{ $product->descripcion_corta }}</textarea>
+                        @error('descripcion_corta')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="descripcion_larga" class="block text-sm font-medium text-gray-700">Descripción Larga</label>
+                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('descripcion_larga') border-red-500 @enderror" id="descripcion_larga" name="descripcion_larga">{{ $product->descripcion_larga }}</textarea>
+                        @error('descripcion_larga')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>

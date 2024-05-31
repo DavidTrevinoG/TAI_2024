@@ -7,24 +7,18 @@ create table if not exists categorias(
     nombre varchar(100) not null
 );
 
-create table if not exists colores(
-    id_color int auto_increment primary key,
-    nombre varchar(100) not null
-);
 
 create table if not exists productos(
     id_producto int auto_increment primary key,
     nombre varchar(100) not null,
-    precio float not null,
     id_categoria int not null,
     precio_venta float not null,
     precio_compra float not null,  
     fecha_anadido date not null,
-    id_color int not null,
+    color varchar(100) not null,
     descripcion_corta varchar(100) not null,
     descripcion_larga varchar(100) not null,
-    foreign key(id_categoria) references categorias(id_categoria),
-    foreign key(id_color) references colores(id_color)
+    foreign key(id_categoria) references categorias(id_categoria)
 );
 
 create table if not exists clientes(

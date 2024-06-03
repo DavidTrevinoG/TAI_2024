@@ -48,7 +48,9 @@ class InventariosController extends Controller
      */
     public function show(Inventarios $inventarios): View
     {
-        return view('inventarios.show', compact('inventarios'));
+        $categories = Category::all();
+        $products = Product::all();
+        return view('inventarios.show', compact('inventarios', 'categories', 'products'));
     }
 
     /**
@@ -56,7 +58,9 @@ class InventariosController extends Controller
      */
     public function edit(Inventarios $inventarios): View
     {
-        return view('inventarios.edit', compact('inventarios'));
+        $categories = Category::all();
+        $products = Product::all();
+        return view('inventarios.edit', compact('inventarios', 'categories', 'products'));
     }
 
     /**

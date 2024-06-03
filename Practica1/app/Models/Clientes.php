@@ -16,4 +16,9 @@ class Clientes extends Model
         'direccion',
         'rfc'
     ];
+
+    public function inventarios()
+    {
+        return $this->hasMany(Inventarios::class);
+    }
 }

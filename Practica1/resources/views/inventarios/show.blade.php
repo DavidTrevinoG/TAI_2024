@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="category" class="block text-sm font-medium text-gray-700"><strong>Categoría:</strong></label>
-                        <p class="mt-1">{{ $inventarios->category->name }}</p>
+                        <p class="mt-1">{{ $inventarios->categories->name }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="fecha_entrada" class="block text-sm font-medium text-gray-700"><strong>Fecha de Entrada:</strong></label>

@@ -15,44 +15,44 @@
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-semibold">Editar Cliente</h2>
-                    <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
 
-                <form action="{{ route('clientes.update', $clientes->id) }}" method="post">
+                <form action="{{ route('clientes.update', $cliente->id) }}" method="post">
                     @csrf
                     @method("PUT")
 
                     <div class="mb-4">
                         <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('name') border-red-500 @enderror" id="name" name="name" value="{{ $clientes->name }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('name') border-red-500 @enderror" id="name" name="name" value="{{ $cliente->name }}">
                         @error('name')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('email') border-red-500 @enderror" id="email" name="email" value="{{ $clientes->email }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('email') border-red-500 @enderror" id="email" name="email" value="{{ $cliente->email }}">
                         @error('email')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="telefono" class="block text-sm font-medium text-gray-700">Telefono</label>
-                        <input type="number" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('telefono') border-red-500 @enderror" id="telefono" name="telefono" value="{{ $clientes->telefono }}">
+                        <input type="number" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('telefono') border-red-500 @enderror" id="telefono" name="telefono" value="{{ $cliente->telefono }}">
                         @error('telefono')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('direccion') border-red-500 @enderror" id="direccion" name="direccion" value="{{ $clientes->direccion }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('direccion') border-red-500 @enderror" id="direccion" name="direccion" value="{{ $cliente->direccion }}">
                         @error('direccion')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="rfc" class="block text-sm font-medium text-gray-700">RFC</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('rfc') border-red-500 @enderror" id="rfc" name="rfc" value="{{ $clientes->rfc }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('rfc') border-red-500 @enderror" id="rfc" name="rfc" value="{{ $cliente->rfc }}">
                         @error('rfc')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

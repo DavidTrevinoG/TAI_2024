@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container mx-auto mt-8">
-    <div class="md:w-3/4 mx-auto">
+    <div class="md:w-4/4 mx-auto">
 
         @session('success')
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
@@ -19,6 +19,7 @@
                     <i class="bi bi-plus-circle mr-2"></i> Agregar nuevo inventario
                 </a>
 
+
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
@@ -30,7 +31,7 @@
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Motivo</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tipo de Movimiento</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
@@ -49,9 +50,9 @@
                                 <form action="{{ route('inventarios.destroy', $inventario->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <a href="{{ route('inventarios.show', $inventario->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i> Show</a>
-                                    <a href="{{ route('inventarios.edit', $inventario->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i> Edit</a>
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i> Delete</button>
+                                    <a href="{{ route('inventarios.show', $inventario->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i> Mostrar</a>
+                                    <a href="{{ route('inventarios.edit', $inventario->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i> Editar</a>
+                                    <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i> Eliminar</button>
                                 </form>
                             </td>
                         </tr>

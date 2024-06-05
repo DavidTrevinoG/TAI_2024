@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 
 class ClientesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
@@ -42,25 +43,25 @@ class ClientesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Clientes $clientes): View
+    public function show(Clientes $cliente): View
     {
-        return view('clientes.show', compact('clientes'));
+        return view('clientes.show', compact('cliente'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Clientes $clientes): View
+    public function edit(Clientes $cliente): View
     {
-        return view('clientes.edit', compact('clientes'));
+        return view('clientes.edit', compact('cliente'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateClientesRequest $request, Clientes $clientes): RedirectResponse
+    public function update(UpdateClientesRequest $request, Clientes $cliente): RedirectResponse
     {
-        $clientes->update($request->validated());
+        $cliente->update($request->validated());
 
         return redirect()->back()
             ->withSuccess('Cliente is updated successfully.');
@@ -69,9 +70,9 @@ class ClientesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Clientes $clientes): RedirectResponse
+    public function destroy(Clientes $cliente): RedirectResponse
     {
-        $clientes->delete();
+        $cliente->delete();
 
         return redirect()->route('clientes.index')
             ->withSuccess('Cliente is deleted successfully.');

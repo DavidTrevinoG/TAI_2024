@@ -9,7 +9,7 @@
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-semibold">Agregar un nuevo cliente</h2>
-                    <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Atras</a>
+                    <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
 
                 <form action="{{ route('clientes.store') }}" method="post">

@@ -46,29 +46,29 @@ class InventariosController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Inventarios $inventarios): View
+    public function show(Inventarios $inventario): View
     {
         $categories = Category::all();
         $products = Product::all();
-        return view('inventarios.show', compact('inventarios', 'categories', 'products'));
+        return view('inventarios.show', compact('inventario', 'categories', 'products'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Inventarios $inventarios): View
+    public function edit(Inventarios $inventario): View
     {
         $categories = Category::all();
         $products = Product::all();
-        return view('inventarios.edit', compact('inventarios', 'categories', 'products'));
+        return view('inventarios.edit', compact('inventario', 'categories', 'products'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateInventariosRequest $request, Inventarios $inventarios): RedirectResponse
+    public function update(UpdateInventariosRequest $request, Inventarios $inventario): RedirectResponse
     {
-        $inventarios->update($request->validated());
+        $inventario->update($request->validated());
 
         return redirect()->back()
             ->withSuccess('Inventario Actualizado');
@@ -77,9 +77,9 @@ class InventariosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Inventarios $inventarios): RedirectResponse
+    public function destroy(Inventarios $inventario): RedirectResponse
     {
-        $inventarios->delete();
+        $inventario->delete();
 
         return redirect()->route('inventarios.index')
             ->withSuccess('Inventario eliminado exitosamente.');

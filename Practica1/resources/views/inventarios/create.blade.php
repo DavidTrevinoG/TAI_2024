@@ -8,8 +8,8 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold">Agregar nuevo inventario</h2>
-                    <a href="{{ route('inventarios.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <h2 class="text-2xl font-semibold">Agregar un Inventario</h2>
+                    <a href="{{ route('inventarios.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
                 <form action="{{ route('inventarios.store') }}" method="post">
                     @csrf

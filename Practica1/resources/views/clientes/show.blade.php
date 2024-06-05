@@ -9,29 +9,29 @@
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-2xl font-semibold">Información de clientes</h2>
-                    <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Atras</a>
+                    <a href="{{ route('clientes.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
 
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Nombre:</strong></label>
-                        <p class="mt-1">{{ $clientes->name }}</p>
+                        <p class="mt-1">{{ $cliente->name }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="name" class="block text-sm font-medium text-gray-700"><strong>Email:</strong></label>
-                        <p class="mt-1">{{ $clientes->email }}</p>
+                        <label for="email" class="block text-sm font-medium text-gray-700"><strong>Email:</strong></label>
+                        <p class="mt-1">{{ $cliente->email }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="name" class="block text-sm font-medium text-gray-700"><strong>Telefono:</strong></label>
-                        <p class="mt-1">{{ $clientes->telefono }}</p>
+                        <label for="telefono" class="block text-sm font-medium text-gray-700"><strong>Telefono:</strong></label>
+                        <p class="mt-1">{{ $cliente->telefono }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="name" class="block text-sm font-medium text-gray-700"><strong>Dirección:</strong></label>
-                        <p class="mt-1">{{ $clientes->direccion }}</p>
+                        <label for="direccion" class="block text-sm font-medium text-gray-700"><strong>Dirección:</strong></label>
+                        <p class="mt-1">{{ $cliente->direccion }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="name" class="block text-sm font-medium text-gray-700"><strong>RFC:</strong></label>
-                        <p class="mt-1">{{ $clientes->rfc }}</p>
+                        <label for="rfc" class="block text-sm font-medium text-gray-700"><strong>RFC:</strong></label>
+                        <p class="mt-1">{{ $cliente->rfc }}</p>
                     </div>
                 </div>
             </div>

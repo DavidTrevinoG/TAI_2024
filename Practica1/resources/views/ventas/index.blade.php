@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container mx-auto mt-8">
-    <div class="md:w-3/4 mx-auto">
+    <div class="md:w-4/4 mx-auto">
 
         @session('success')
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">

@@ -14,19 +14,18 @@
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 bg-white border-b border-gray-200">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold">Editar Inventarios</h2>
-                    <a href="{{ route('inventarios.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
+                    <h2 class="text-2xl font-semibold">Editar Inventario</h2>
+                    <a href="{{ route('inventarios.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
 
-                <form action="{{ route('inventarios.update', $inventarios->id) }}" method="post">
+                <form action="{{ route('inventarios.update', $inventario->id) }}" method="post">
                     @csrf
                     @method("PUT")
-
                     <div class="mb-4">
                         <label for="producto_id" class="block text-sm font-medium text-gray-700">Producto</label>
                         <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('producto_id') border-red-500 @enderror" id="producto_id" name="producto_id">
                             @foreach($products as $product)
-                            <option value="{{ $product->id }}" {{ $inventarios->producto_id == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
+                            <option value="{{ $product->id }}" {{ $inventario->producto_id == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
                             @endforeach
                         </select>
                         @error('producto_id')
@@ -38,7 +37,7 @@
                         <label for="category_id" class="block text-sm font-medium text-gray-700">Categoría</label>
                         <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('category_id') border-red-500 @enderror" id="category_id" name="category_id">
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ $inventarios->categories_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ $inventario->categories_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                             @endforeach
                         </select>
                         @error('category_id')
@@ -48,7 +47,7 @@
 
                     <div class="mb-4">
                         <label for="fecha_entrada" class="block text-sm font-medium text-gray-700">Fecha Entrada</label>
-                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_entrada') border-red-500 @enderror" id="fecha_entrada" name="fecha_entrada" value="{{ $inventarios->fecha_entrada }}">
+                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_entrada') border-red-500 @enderror" id="fecha_entrada" name="fecha_entrada" value="{{ $inventario->fecha_entrada }}">
                         @error('fecha_entrada')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -56,7 +55,7 @@
 
                     <div class="mb-4">
                         <label for="fecha_salida" class="block text-sm font-medium text-gray-700">Fecha Salida</label>
-                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_salida') border-red-500 @enderror" id="fecha_salida" name="fecha_salida" value="{{ $inventarios->fecha_salida }}">
+                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_salida') border-red-500 @enderror" id="fecha_salida" name="fecha_salida" value="{{ $inventario->fecha_salida }}">
                         @error('fecha_salida')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -64,7 +63,7 @@
 
                     <div class="mb-4">
                         <label for="motivo" class="block text-sm font-medium text-gray-700">Motivo</label>
-                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('motivo') border-red-500 @enderror" id="motivo" name="motivo">{{ $inventarios->motivo }}</textarea>
+                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('motivo') border-red-500 @enderror" id="motivo" name="motivo">{{ $inventario->motivo }}</textarea>
                         @error('motivo')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -72,7 +71,7 @@
 
                     <div class="mb-4">
                         <label for="tipo_movimiento" class="block text-sm font-medium text-gray-700">Tipo Movimiento</label>
-                        <input type="text" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('tipo_movimiento') border-red-500 @enderror" id="tipo_movimiento" name="tipo_movimiento" value="{{ $inventarios->tipo_movimiento }}">
+                        <input type="text" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('tipo_movimiento') border-red-500 @enderror" id="tipo_movimiento" name="tipo_movimiento" value="{{ $inventario->tipo_movimiento }}">
                         @error('tipo_movimiento')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -80,7 +79,7 @@
 
                     <div class="mb-4">
                         <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
-                        <input type="number" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror" id="cantidad" name="cantidad" value="{{ $inventarios->cantidad }}">
+                        <input type="number" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror" id="cantidad" name="cantidad" value="{{ $inventario->cantidad }}">
                         @error('cantidad')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

@@ -23,6 +23,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    // Función para crear una nueva categoría
     public function create(): View
     {
         return view('categories.create');
@@ -31,6 +32,8 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    // Función para guardar la nueva categoría
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
         Category::create($request->validated());
@@ -42,6 +45,8 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
+
+    // Función para mostrar una categoría
     public function show(Category $category): View
     {
         return view('categories.show', compact('category'));
@@ -50,6 +55,8 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
+    // Función para editar una categoría
     public function edit(Category $category): View
     {
         return view('categories.edit', compact('category'));
@@ -58,6 +65,8 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    // Función para actualizar una categoría
     public function update(UpdateCategoryRequest $request, Category $category): RedirectResponse
     {
         $category->update($request->validated());
@@ -69,6 +78,8 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    // Función para eliminar una categoría
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();

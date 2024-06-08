@@ -15,6 +15,8 @@ class InventariosController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    // Función para mostrar la lista de inventarios
     public function index(): View
     {
         return view('inventarios.index', [
@@ -25,6 +27,8 @@ class InventariosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    // Función para crear un nuevo inventario
     public function create(): View
     {
         $categories = Category::all();
@@ -35,6 +39,8 @@ class InventariosController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    // Función para guardar el nuevo inventario
     public function store(StoreInventariosRequest $request): RedirectResponse
     {
         Inventarios::create($request->validated());
@@ -46,6 +52,8 @@ class InventariosController extends Controller
     /**
      * Display the specified resource.
      */
+
+    // Función para mostrar un inventario
     public function show(Inventarios $inventario): View
     {
         $categories = Category::all();
@@ -56,6 +64,8 @@ class InventariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
+    // Función para editar un inventario
     public function edit(Inventarios $inventario): View
     {
         $categories = Category::all();
@@ -66,6 +76,8 @@ class InventariosController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    // Función para actualizar un inventario
     public function update(UpdateInventariosRequest $request, Inventarios $inventario): RedirectResponse
     {
         $inventario->update($request->validated());
@@ -77,6 +89,8 @@ class InventariosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    // Función para eliminar un inventario
     public function destroy(Inventarios $inventario): RedirectResponse
     {
         $inventario->delete();

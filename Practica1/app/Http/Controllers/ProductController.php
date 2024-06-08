@@ -14,6 +14,8 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    // Función para mostrar la lista de productos
     public function index(): View
     {
         return view('products.index', [
@@ -25,6 +27,8 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    // Función para crear un nuevo producto
     public function create(): View
     {
         $categories = Category::all(); // Obtener todas las categorías
@@ -34,6 +38,8 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    // Función para guardar el nuevo producto
     public function store(StoreProductRequest $request): RedirectResponse
     {
         Product::create($request->validated());
@@ -45,6 +51,8 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
+
+    // Función para mostrar un producto
     public function show(Product $product): View
     {
         return view('products.show', compact('product'));
@@ -53,6 +61,8 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
+    // Función para editar un producto
     public function edit(Product $product): View
     {
         $categories = Category::all(); // Obtener todas las categorías
@@ -62,6 +72,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    // Función para actualizar un producto
     public function update(UpdateProductRequest $request, Product $product): RedirectResponse
     {
         $product->update($request->validated());
@@ -73,6 +85,8 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    // Función para eliminar un producto
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();

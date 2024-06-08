@@ -9,6 +9,7 @@ class Product extends Model
 {
     use HasFactory;
 
+    // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
         'name',
         'category_id',
@@ -20,11 +21,14 @@ class Product extends Model
         'descripcion_larga'
     ];
 
+
+    // Relación uno a muchos
     public function category()
     {
         return $this->belongsTo(Category::class);
     }
 
+    // Relación uno a muchos
     public function inventarios()
     {
         return $this->hasMany(Inventarios::class);

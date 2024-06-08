@@ -14,6 +14,8 @@ class ClientesController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    // Función para mostrar la lista de clientes
     public function index(): View
     {
         return view('clientes.index', [
@@ -24,6 +26,8 @@ class ClientesController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    // Función para crear un nuevo cliente
     public function create(): View
     {
         return view('clientes.create');
@@ -32,6 +36,8 @@ class ClientesController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    // Función para guardar el nuevo cliente
     public function store(StoreClientesRequest $request): RedirectResponse
     {
         Clientes::create($request->validated());
@@ -43,6 +49,8 @@ class ClientesController extends Controller
     /**
      * Display the specified resource.
      */
+
+    // Función para mostrar un cliente
     public function show(Clientes $cliente): View
     {
         return view('clientes.show', compact('cliente'));
@@ -51,6 +59,8 @@ class ClientesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
+
+    // Función para editar un cliente
     public function edit(Clientes $cliente): View
     {
         return view('clientes.edit', compact('cliente'));
@@ -59,6 +69,8 @@ class ClientesController extends Controller
     /**
      * Update the specified resource in storage.
      */
+
+    // Función para actualizar un cliente
     public function update(UpdateClientesRequest $request, Clientes $cliente): RedirectResponse
     {
         $cliente->update($request->validated());
@@ -70,6 +82,8 @@ class ClientesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+    // Función para eliminar un cliente
     public function destroy(Clientes $cliente): RedirectResponse
     {
         $cliente->delete();

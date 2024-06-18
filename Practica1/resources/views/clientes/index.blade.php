@@ -34,31 +34,7 @@
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse ($clientes as $cliente)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->email }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->telefono }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->direccion }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->rfc }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
 
-                                @csrf
-                                @method('DELETE')
-                                <a href="{{ route('clientes.index', $cliente->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i>Mostrar</a>
-                                <a href="{{ route('clientes.index', $cliente->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i> Editar</a>
-                                <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i> Eliminar</button>
-
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center">No hay clientes.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
                 </table>
             </div>
         </div>

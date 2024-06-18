@@ -33,34 +33,8 @@
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse ($inventarios as $inventario)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->producto->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->category->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->fecha_entrada }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->fecha_salida }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->motivo }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->tipo_movimiento }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $inventario->cantidad }}</td>
 
-                            <td class="px-6 py-4 whitespace-nowrap">
 
-                                @csrf
-                                @method('DELETE')
-                                <a href="{{ route('inventarios.index', $inventario->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i> Mostrar</a>
-                                <a href="{{ route('inventarios.index', $inventario->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i> Editar</a>
-                                <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i> Eliminar</button>
-
-                            </td>
-                        </tr>
-                        @empty
-                        <tr>
-                            <td colspan="6" class="text-center">No hay Inventario.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
                 </table>
             </div>
         </div>

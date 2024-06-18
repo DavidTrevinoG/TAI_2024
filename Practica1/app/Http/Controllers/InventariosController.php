@@ -20,7 +20,7 @@ class InventariosController extends Controller
     public function index(): View
     {
         return view('inventarios.index', [
-            'inventarios' => Inventarios::latest()->paginate(4)
+            'Inventarios' => Inventarios::latest()->paginate(4)
         ]);
     }
 

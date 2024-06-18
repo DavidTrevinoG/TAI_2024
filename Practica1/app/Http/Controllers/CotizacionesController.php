@@ -11,7 +11,7 @@ class CotizacionesController extends Controller
     public function index(): View
     {
         return view('cotizaciones.index', [
-            'cotizaciones' => Cotizaciones::latest()->paginate(4)
+            'Cotizaciones' => Cotizaciones::latest()->paginate(4)
         ]);
     }
 }

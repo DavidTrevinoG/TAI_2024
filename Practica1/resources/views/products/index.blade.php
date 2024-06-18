@@ -27,7 +27,7 @@
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoría</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Venta</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Compra</th>
-                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Añadido</th>
+                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Compra</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Corta</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Larga</th>
@@ -39,11 +39,11 @@
                         @forelse ($products as $product)
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->id }}</td>
-                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->name }}</td>
-                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->category->name }}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->nombre }}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->id_categorias }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->precio_venta }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->precio_compra }}</td>
-                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->fecha_anadido }}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->fecha_compra }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->color }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->descripcion_corta }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->descripcion_larga }}</td><!-- Mostrar el nombre de la categoría -->

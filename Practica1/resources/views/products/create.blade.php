@@ -15,21 +15,21 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('name') border-red-500 @enderror" id="name" name="name" value="{{ old('name') }}">
-                        @error('name')
+                        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('nombre') border-red-500 @enderror" id="nombre" name="nombre" value="{{ old('nombre') }}">
+                        @error('nombre')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="mb-4">
-                        <label for="category_id" class="block text-sm font-medium text-gray-700">Categoría</label>
-                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('category_id') border-red-500 @enderror" id="category_id" name="category_id">
+                        <label for="id_categorias" class="block text-sm font-medium text-gray-700">Categoría</label>
+                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('id_categorias') border-red-500 @enderror" id="id_categorias" name="id_categorias">
                             @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('id_categorias') == $category->id ? 'selected' : '' }}>{{ $category->nombre }}</option>
                             @endforeach
                         </select>
-                        @error('category_id')
+                        @error('id_categorias')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
@@ -51,9 +51,9 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="fecha_anadido" class="block text-sm font-medium text-gray-700">Fecha Añadido</label>
-                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_anadido') border-red-500 @enderror" id="fecha_anadido" name="fecha_anadido" value="{{ old('fecha_anadido') }}">
-                        @error('fecha_anadido')
+                        <label for="fecha_compra" class="block text-sm font-medium text-gray-700">Fecha Compra</label>
+                        <input type="date" step="0.01" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_compra') border-red-500 @enderror" id="fecha_compra" name="fecha_compra" value="{{ old('fecha_compra') }}">
+                        @error('fecha_compra')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>

@@ -23,9 +23,9 @@
                     @method("PUT")
 
                     <div class="mb-4">
-                        <label for="name" class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('name') border-red-500 @enderror" id="name" name="name" value="{{ $category->name }}">
-                        @error('name')
+                        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('nombre') border-red-500 @enderror" id="nombre" name="nombre" value="{{ $category->nombre }}">
+                        @error('nombre')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>

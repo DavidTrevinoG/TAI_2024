@@ -11,11 +11,11 @@ class Product extends Model
 
     // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
-        'name',
-        'category_id',
+        'nombre',
+        'id_categorias',
         'precio_venta',
         'precio_compra',
-        'fecha_anadido',
+        'fecha_compra',
         'color',
         'descripcion_corta',
         'descripcion_larga'

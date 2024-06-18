@@ -18,8 +18,8 @@ return new class extends Migration
             $table->decimal('precio', 10, 2);
             $table->decimal('descuento', 10, 2);
             $table->decimal('total', 10, 2);
-            $table->foreign('id_forma_pago')->references('id')->on('FormaPago')->onDelete('restrict');
-            $table->foreign('id_productos')->references('id')->on('Productos')->onDelete('restrict');
+            $table->foreign('id_forma_pago')->references('id')->on('forma_pagos')->onDelete('restrict');
+            $table->foreign('id_productos')->references('id')->on('products')->onDelete('restrict');
             $table->foreign('id_proveedores')->references('id')->on('Proveedores')->onDelete('restrict');
             $table->timestamps();
         });

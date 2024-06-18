@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('Productos', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
             $table->unsignedBigInteger('id_categorias');
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('descripcion_larga');
             $table->foreign('id_categorias')
                 ->references('id')
-                ->on('Categorias')
+                ->on('categories')
                 ->onDelete('restrict');
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('Productos');
+        Schema::dropIfExists('products');
     }
 };

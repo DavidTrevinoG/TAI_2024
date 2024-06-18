@@ -15,7 +15,7 @@
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Nombre:</strong></label>
-                        <p class="mt-1">{{ $category->name }}</p>
+                        <p class="mt-1">{{ $category->nombre }}</p>
                     </div>
                 </div>
             </div>

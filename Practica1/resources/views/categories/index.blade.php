@@ -31,7 +31,7 @@
                         @forelse ($categories as $category)
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $category->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $category->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $category->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <form action="{{ route('categories.destroy', $category->id) }}" method="post">
                                     @csrf

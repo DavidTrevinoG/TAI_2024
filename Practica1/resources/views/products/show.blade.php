@@ -15,11 +15,11 @@
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Nombre:</strong></label>
-                        <p class="mt-1">{{ $product->name }}</p>
+                        <p class="mt-1">{{ $product->nombre }}</p>
                     </div>
                     <div class="col-span-2">
                         <label for="category" class="block text-sm font-medium text-gray-700"><strong>Categoría:</strong></label>
-                        <p class="mt-1">{{ $product->category->name }}</p>
+                        <p class="mt-1">{{ $product->id_categorias }}</p>
                     </div>
                     <div class="col-span-2">
                         <label for="precio_venta" class="block text-sm font-medium text-gray-700"><strong>Precio Venta:</strong></label>
@@ -30,8 +30,8 @@
                         <p class="mt-1">{{ $product->precio_compra}}</p>
                     </div>
                     <div class="col-span-2">
-                        <label for="fecha_anadido" class="block text-sm font-medium text-gray-700"><strong>fecha Añadido:</strong></label>
-                        <p class="mt-1">{{ $product->fecha_anadido }}</p>
+                        <label for="fecha_anadido" class="block text-sm font-medium text-gray-700"><strong>Fecha Compra:</strong></label>
+                        <p class="mt-1">{{ $product->fecha_compra }}</p>
                     </div>
                     <div class="col-span-2">
                         <label for="color" class="block text-sm font-medium text-gray-700"><strong>Color:</strong></label>

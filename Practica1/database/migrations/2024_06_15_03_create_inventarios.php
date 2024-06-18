@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('cantidad');
             $table->foreign('id_productos')
                 ->references('id')
-                ->on('Productos')
+                ->on('products')
                 ->onDelete('restrict');
             $table->timestamps();
         });

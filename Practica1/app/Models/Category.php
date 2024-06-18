@@ -11,7 +11,7 @@ class Category extends Model
 
     // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
-        'name'
+        'nombre'
     ];
 
     // Relación uno a muchos

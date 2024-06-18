@@ -30,11 +30,11 @@ return new class extends Migration
                 ->onDelete('restrict');
             $table->foreign('id_formapago')
                 ->references('id')
-                ->on('FormaPago')
+                ->on('forma_pagos')
                 ->onDelete('restrict');
             $table->foreign('id_productos')
                 ->references('id')
-                ->on('Productos')
+                ->on('products')
                 ->onDelete('restrict');
         });
     }

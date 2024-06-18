@@ -1,73 +1,123 @@
 @extends('layouts.app')
 
 @section('content')
-
 <div class="container mx-auto mt-8">
-    <div class="md:w-4/4 mx-auto">
+    <div class="flex md:w-4/4 mx-auto bg-white p-6 rounded-lg shadow-md">
 
-        @session('success')
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ $value }}</span>
-        </div>
-        @endsession
+        <div class="w-2/3 mr-4">
+            <h2 class="text-2xl font-semibold mb-6">Ventas</h2>
 
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 bg-white border-b border-gray-200">
-                <h2 class="text-2xl font-semibold mb-6">Lista de Ventas</h2>
+            <div class="flex mb-4">
+                <select id="customer" class="form-select rounded-md shadow-sm mt-1 block w-full">
+                    <option value="walk-in"></option>
+                    <option value="walk-in">Cliente Certificado</option>
+                </select>
+            </div>
 
-                <a href="{{ route('ventas.create') }}" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded inline-flex items-center mb-4">
-                    <i class="bi bi-plus-circle mr-2"></i> Agregar nueva venta
-                </a>
 
-                <table class="min-w-full divide-y divide-gray-200">
-                    <thead>
-                        <tr>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoría</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Venta</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IVA</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
-                        </tr>
+            <table class="min-w-full divide-y divide-gray-200">
+                <thead>
+                    <tr>
+                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
+                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
+                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
+                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
+                        <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-items" class="bg-white divide-y divide-gray-200">
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">Sabritas</td>
+                        <td class="px-6 py-4 whitespace-nowrap">2</td>
+                        <td class="px-6 py-4 whitespace-nowrap">$10.00</td>
+                        <td class="px-6 py-4 whitespace-nowrap">$20.00</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">Coca Cola</td>
+                        <td class="px-6 py-4 whitespace-nowrap">1</td>
+                        <td class="px-6 py-4 whitespace-nowrap">$15.00</td>
+                        <td class="px-6 py-4 whitespace-nowrap">$15.00</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <button class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
-                        @forelse ($ventas as $venta)
-                        <tr>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->products->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->categories->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->cliente->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->cantidad }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->fecha_venta }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->subtotal }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->iva }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $venta->total }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
-                                <form action="{{ route('ventas.destroy', $venta->id) }}" method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <a href="{{ route('ventas.show', $venta->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i> Show</a>
-                                    <a href="{{ route('ventas.edit', $venta->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i> Edit</a>
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i> Delete</button>
-                                </form>
-                            </td>
-                        </tr>
-                        @empty
-
-                        <tr>
-                            <td colspan="6" class="text-center">No sells found.</td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+            <div class="flex justify-between items-center mt-4">
+                <span class="text-lg font-semibold">Total: $<span id="total-amount">35.00</span></span>
+                <button id="submit-sale" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded">Vender</button>
             </div>
         </div>
+
+        <div class="w-1/3 bg-gray-100 p-4 rounded-lg shadow-inner">
+            <div class="relative">
+                <input type="text" id="product-search" class="form-input rounded-md shadow-sm mt-1 block w-full" placeholder="Buscar un producto...">
+                <div id="search-results" class="absolute bg-white border border-gray-300 rounded-lg mt-1 w-full max-h-60 overflow-auto shadow-lg z-10 hidden">
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+
+<script>
+    document.getElementById('product-search').addEventListener('input', function() {
+        let query = this.value.toLowerCase();
+        let searchResults = document.getElementById('search-results');
+
+        if (query.length > 0) {
+            searchResults.innerHTML = '';
+            let products = ['Sabritas', 'Coca Cola', 'Pepsi', 'Doritos', 'Fanta'];
+            let filteredProducts = products.filter(product => product.toLowerCase().includes(query));
+
+            filteredProducts.forEach(product => {
+                let item = document.createElement('div');
+                item.classList.add('px-4', 'py-2', 'cursor-pointer', 'hover:bg-gray-200');
+                item.textContent = product;
+                searchResults.appendChild(item);
+
+                item.addEventListener('click', function() {
+                    document.getElementById('product-search').value = product;
+                    searchResults.classList.add('hidden');
+                });
+            });
+
+            searchResults.classList.remove('hidden');
+        } else {
+            searchResults.classList.add('hidden');
+        }
+    });
+
+    document.addEventListener('click', function(event) {
+        let searchResults = document.getElementById('search-results');
+        if (!document.getElementById('product-search').contains(event.target)) {
+            searchResults.classList.add('hidden');
+        }
+    });
+</script>
+
+<style>
+    .form-input,
+    .form-select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .bg-green-500:hover {
+        background-color: #38a169;
+    }
+
+    .bg-red-500:hover {
+        background-color: #e53e3e;
+    }
+</style>
 
 @endsection

@@ -9,6 +9,12 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\InventariosController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\ComprasController;
+use App\Http\Controllers\FormaPagoController;
+use App\Http\Controllers\VendedoresController;
+use App\Http\Controllers\CotizacionesController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,3 +37,8 @@ Route::resource('categories', CategoryController::class);
 Route::resource('clientes', ClientesController::class);
 Route::resource('inventarios', InventariosController::class);
 Route::resource('ventas', VentasController::class);
+Route::resource('proveedores', ProveedoresController::class);
+Route::resource('compras', ComprasController::class);
+Route::resource('formapago', FormaPagoController::class);
+Route::resource('vendedores', VendedoresController::class);
+Route::resource('cotizaciones', CotizacionesController::class);

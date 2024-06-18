@@ -1,3 +1,36 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Estilo específico para el logo para evitar subrayado */
+.logo-link {
+    text-decoration: none; /* Quitar cualquier subrayado predeterminado */
+}
+
+.logo-link:hover::after {
+    content: none; /* Asegurarse de que no haya contenido de subrayado */
+}
+
+/* Animación de subrayado */
+a:not(.logo-link):hover {
+    position: relative;
+}
+
+a:not(.logo-link):hover::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff; /* Cambia el color según tus preferencias */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+a:not(.logo-link):hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+

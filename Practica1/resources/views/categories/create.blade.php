@@ -12,7 +12,7 @@
                     <a href="{{ route('categories.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
 
-                <form action="{{ route('categories.store') }}" method="post">
+                <form id="categoryForm" action="{{ route('categories.store') }}" method="post">
                     @csrf
                     <div class="mb-4">
                         <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
@@ -22,13 +22,24 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <button type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregar Categoría</button>
+                        <button type="submit" id="submitButton" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregar Categoría</button>
                     </div>
-
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('categoryForm');
+        const submitButton = document.getElementById('submitButton');
+
+        form.addEventListener('submit', function() {
+            submitButton.setAttribute('disabled', 'disabled');
+            submitButton.innerText = 'Enviando...';
+        });
+    });
+</script>
 
 @endsection

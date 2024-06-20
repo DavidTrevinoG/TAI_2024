@@ -33,12 +33,12 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $category->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $category->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                <form id="deleteForm" action="{{ route('categories.destroy', $category->id) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <a href="{{ route('categories.show', $category->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i>Mostrar</a>
                                     <a href="{{ route('categories.edit', $category->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i>Editar</a>
-                                    <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i>Eliminar</button>
+                                    <button id="deleteButton" type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i>Eliminar</button>
                                 </form>
                             </td>
                         </tr>
@@ -53,5 +53,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('deleteForm');
+        const submitButton = document.getElementById('deleteButton');
+
+        form.addEventListener('submit', function() {
+            submitButton.setAttribute('disabled', 'disabled');
+            submitButton.innerText = 'Eliminando...';
+        });
+    });
+</script>
 
 @endsection

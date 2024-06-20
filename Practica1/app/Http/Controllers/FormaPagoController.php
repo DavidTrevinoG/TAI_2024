@@ -16,7 +16,7 @@ class FormaPagoController extends Controller
     public function index(): View
     {
         return view('formapago.index', [
-            'FormaPago' => FormaPago::latest()->paginate(4)
+            'FormaPago' => FormaPago::latest()->paginate()
         ]);
     }
 }

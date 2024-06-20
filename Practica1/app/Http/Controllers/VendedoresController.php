@@ -16,7 +16,7 @@ class VendedoresController extends Controller
     public function index(): View
     {
         return view('vendedores.index', [
-            'Vendedores' => Vendedores::latest()->paginate(4)
+            'Vendedores' => Vendedores::latest()->paginate()
         ]);
     }
 }

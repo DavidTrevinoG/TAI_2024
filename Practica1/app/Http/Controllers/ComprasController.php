@@ -11,7 +11,7 @@ class ComprasController extends Controller
     public function index(): View
     {
         return view('compras.index', [
-            'Compras' => Compras::latest()->paginate(4)
+            'Compras' => Compras::latest()->paginate()
         ]);
     }
 }

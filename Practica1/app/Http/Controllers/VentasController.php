@@ -20,7 +20,7 @@ class VentasController extends Controller
     {
 
         return view('ventas.index', [
-            'Ventas' => Ventas::latest()->paginate(4)
+            'Ventas' => Ventas::latest()->paginate()
         ]);
     }
 

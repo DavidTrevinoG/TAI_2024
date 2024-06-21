@@ -15,23 +15,35 @@
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Nombre:</strong></label>
-                        <p class="mt-1">{{ $cliente->name }}</p>
+                        <p class="mt-1">{{ $cliente->nombre}}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="email" class="block text-sm font-medium text-gray-700"><strong>Email:</strong></label>
-                        <p class="mt-1">{{ $cliente->email }}</p>
+                        <label for="correo" class="block text-sm font-medium text-gray-700"><strong>Correo:</strong></label>
+                        <p class="mt-1">{{ $cliente->correo}}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="telefono" class="block text-sm font-medium text-gray-700"><strong>Telefono:</strong></label>
-                        <p class="mt-1">{{ $cliente->telefono }}</p>
+                        <p class="mt-1">{{ $cliente->telefono}}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="direccion" class="block text-sm font-medium text-gray-700"><strong>Dirección:</strong></label>
-                        <p class="mt-1">{{ $cliente->direccion }}</p>
+                        <p class="mt-1">{{ $cliente->direccion}}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="rfc" class="block text-sm font-medium text-gray-700"><strong>RFC:</strong></label>
-                        <p class="mt-1">{{ $cliente->rfc }}</p>
+                        <p class="mt-1">{{ $cliente->rfc}}</p>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="razon_social" class="block text-sm font-medium text-gray-700"><strong>Razón Social:</strong></label>
+                        <p class="mt-1">{{ $cliente->razon_social}}</p>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="codigo_postal" class="block text-sm font-medium text-gray-700"><strong>Código Postal:</strong></label>
+                        <p class="mt-1">{{ $cliente->codigo_postal}}</p>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="regimen_fiscal" class="block text-sm font-medium text-gray-700"><strong>Regimen Fiscal:</strong></label>
+                        <p class="mt-1">{{ $cliente->regimen_fiscal}}</p>
                     </div>
                 </div>
             </div>

@@ -22,11 +22,14 @@ class UpdateClientesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:250',
-            'email' => 'required|string|max:250',
+            'nombre' => 'required|string|max:250',
+            'correo' => 'required|string|max:250',
             'telefono' => 'required|string|max:250',
             'direccion' => 'required|string|max:250',
-            'rfc' => 'required|string|max:250'
+            'rfc' => 'required|string|max:250',
+            'razon_social' => 'required|string|max:250',
+            'codigo_postal' => 'required|string|max:250',
+            'regimen_fiscal' => 'required|string|max:250'
         ];
     }
 }

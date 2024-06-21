@@ -15,19 +15,19 @@
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Nombre:</strong></label>
-                        <p class="mt-1">{{ $proveedor->nombre }}</p>
+                        <p class="mt-1">{{ $proveedore->nombre }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Nombre de Contacto:</strong></label>
-                        <p class="mt-1">{{ $proveedor->nombre_contacto }}</p>
+                        <p class="mt-1">{{ $proveedore->nombre_contacto }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Teléfono:</strong></label>
-                        <p class="mt-1">{{ $proveedor->telefono }}</p>
+                        <p class="mt-1">{{ $proveedore->telefono }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Correo Electrónico:</strong></label>
-                        <p class="mt-1">{{ $proveedor->correo }}</p>
+                        <p class="mt-1">{{ $proveedore->correo }}</p>
                     </div>
                 </div>
             </div>

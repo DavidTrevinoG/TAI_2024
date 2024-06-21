@@ -33,4 +33,9 @@ class Product extends Model
     {
         return $this->hasMany(Inventarios::class, 'id_productos');
     }
+
+    public function cotizaciones()
+    {
+        return $this->hasMany(Cotizaciones::class, 'id_productos');
+    }
 }

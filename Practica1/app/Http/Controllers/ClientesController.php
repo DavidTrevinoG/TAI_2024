@@ -19,7 +19,7 @@ class ClientesController extends Controller
     public function index(): View
     {
         return view('clientes.index', [
-            'Clientes' => Clientes::latest()->paginate()
+            'clientes' => Clientes::latest()->paginate()
         ]);
     }
 
@@ -41,6 +41,7 @@ class ClientesController extends Controller
     public function store(StoreClientesRequest $request): RedirectResponse
     {
         Clientes::create($request->validated());
+
 
         return redirect()->route('clientes.index')
             ->withSuccess('Nueva cliente agregada.');
@@ -86,6 +87,13 @@ class ClientesController extends Controller
     // Función para eliminar un cliente
     public function destroy(Clientes $cliente): RedirectResponse
     {
+
+        if ($cliente->cotizaciones()->count() > 0) {
+            return redirect()->route('clientes.index')
+                ->with('error', 'Cliente no puede ser eliminada porque tiene cotizaciones asociadas.');
+        }
+
+
         $cliente->delete();
 
         return redirect()->route('clientes.index')

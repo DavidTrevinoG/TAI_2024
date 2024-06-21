@@ -18,34 +18,34 @@
                     <a href="{{ route('proveedores.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
 
-                <form action="{{ route('proveedores.update', $proveedor->id) }}" method="post">
+                <form action="{{ route('proveedores.update', $proveedore->id) }}" method="post">
                     @csrf
                     @method("PUT")
 
                     <div class="mb-4">
                         <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('nombre') border-red-500 @enderror" id="nombre" name="nombre" value="{{ $proveedor->nombre }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('nombre') border-red-500 @enderror" id="nombre" name="nombre" value="{{ $proveedore->nombre }}">
                         @error('nombre')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="nombre_contacto" class="block text-sm font-medium text-gray-700">Nombre de Contacto</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('nombre_contacto') border-red-500 @enderror" id="nombre_contacto" name="nombre_contacto" value="{{ $proveedor->nombre_contacto }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('nombre_contacto') border-red-500 @enderror" id="nombre_contacto" name="nombre_contacto" value="{{ $proveedore->nombre_contacto }}">
                         @error('nombre_contacto')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('telefono') border-red-500 @enderror" id="telefono" name="telefono" value="{{ $proveedor->telefono }}">
+                        <input type="text" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('telefono') border-red-500 @enderror" id="telefono" name="telefono" value="{{ $proveedore->telefono }}">
                         @error('telefono')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
-                        <input type="email" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('correo') border-red-500 @enderror" id="correo" name="correo" value="{{ $proveedor->correo }}">
+                        <input type="email" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('correo') border-red-500 @enderror" id="correo" name="correo" value="{{ $proveedore->correo }}">
                         @error('correo')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

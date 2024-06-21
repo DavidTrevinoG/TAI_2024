@@ -11,10 +11,19 @@ class Clientes extends Model
 
     // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
-        'name',
-        'email',
+        'nombre',
+        'correo',
         'telefono',
         'direccion',
-        'rfc'
+        'rfc',
+        'razon_social',
+        'codigo_postal',
+        'regimen_fiscal'
     ];
+
+    // Relación uno a muchos
+    public function cotizaciones()
+    {
+        return $this->hasMany(Cotizaciones::class, 'id_clientes');
+    }
 }

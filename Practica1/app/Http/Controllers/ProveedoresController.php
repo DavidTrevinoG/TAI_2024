@@ -47,9 +47,9 @@ class ProveedoresController extends Controller
      */
 
     // Función para mostrar una categoría
-    public function show(Proveedores $proveedor): View
+    public function show(Proveedores $proveedore): View
     {
-        return view('proveedores.show', compact('proveedor'));
+        return view('proveedores.show', compact('proveedore'));
     }
 
     /**
@@ -57,18 +57,18 @@ class ProveedoresController extends Controller
      */
 
     // Función para editar una categoría
-    public function edit(Proveedores $proveedor): View
+    public function edit(Proveedores $proveedore): View
     {
-        return view('proveedores.edit', compact('proveedor'));
+        return view('proveedores.edit', compact('proveedore'));
     }
 
     /**
      * Update the specified resource in storage.
      */
 
-    public function update(UpdateProveedoresRequest $request, Proveedores $proveedor): RedirectResponse
+    public function update(UpdateProveedoresRequest $request, Proveedores $proveedore): RedirectResponse
     {
-        $proveedor->update($request->validated());
+        $proveedore->update($request->validated());
 
         return redirect()->back()
             ->withSuccess('Proveedores is updated successfully.');
@@ -78,9 +78,9 @@ class ProveedoresController extends Controller
      * Remove the specified resource from storage.
      */
 
-    public function destroy(Proveedores $proveedor): RedirectResponse
+    public function destroy(Proveedores $proveedore): RedirectResponse
     {
-        $proveedor->delete();
+        $proveedore->delete();
 
         return redirect()->route('proveedores.index')
             ->withSuccess('Proveedor is deleted successfully.');

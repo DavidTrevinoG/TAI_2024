@@ -11,24 +11,17 @@ class Inventarios extends Model
 
     // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
-        'producto_id',
-        'category_id',
-        'fecha_entrada',
+        'id_productos',
         'fecha_salida',
+        'fecha_entrada',
+        'movimiento',
         'motivo',
-        'tipo_movimiento',
         'cantidad'
     ];
 
     // Relación uno a muchos
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
-
-    // Relación uno a muchos
     public function producto()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Product::class, 'id_productos');
     }
 }

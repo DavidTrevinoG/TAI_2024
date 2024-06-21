@@ -15,11 +15,7 @@
                 <div class="grid grid-cols-2 gap-y-4">
                     <div class="col-span-2 sm:col-span-1">
                         <label for="name" class="block text-sm font-medium text-gray-700"><strong>Producto:</strong></label>
-                        <p class="mt-1">{{ $inventario->producto->name }}</p>
-                    </div>
-                    <div class="col-span-2">
-                        <label for="category" class="block text-sm font-medium text-gray-700"><strong>Categoría:</strong></label>
-                        <p class="mt-1">{{ $inventario->category->name }}</p>
+                        <p class="mt-1">{{ $inventario->producto->nombre }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="fecha_entrada" class="block text-sm font-medium text-gray-700"><strong>Fecha de Entrada:</strong></label>
@@ -34,8 +30,8 @@
                         <p class="mt-1">{{ $inventario->motivo }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
-                        <label for="tipo_movimiento" class="block text-sm font-medium text-gray-700"><strong>Tipo de Movimiento:</strong></label>
-                        <p class="mt-1">{{ $inventario->tipo_movimiento }}</p>
+                        <label for="tipo_movimiento" class="block text-sm font-medium text-gray-700"><strong>Movimiento:</strong></label>
+                        <p class="mt-1">{{ $inventario->movimiento }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="cantidad" class="block text-sm font-medium text-gray-700"><strong>Cantidad:</strong></label>

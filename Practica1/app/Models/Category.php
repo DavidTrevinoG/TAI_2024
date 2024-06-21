@@ -17,12 +17,6 @@ class Category extends Model
     // Relación uno a muchos
     public function products()
     {
-        return $this->hasMany(Product::class);
-    }
-
-    // Relación uno a muchos
-    public function inventarios()
-    {
-        return $this->hasMany(Inventarios::class);
+        return $this->hasMany(Product::class, 'id_categorias');
     }
 }

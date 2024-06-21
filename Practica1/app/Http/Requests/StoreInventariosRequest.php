@@ -22,12 +22,11 @@ class StoreInventariosRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'producto_id' => 'required|exists:products,id',
-            'category_id' => 'required|exists:categories,id',
+            'id_productos' => 'required|exists:products,id',
             'fecha_entrada' => 'required|date',
             'fecha_salida' => 'required|date',
             'motivo' => 'required|string',
-            'tipo_movimiento' => 'required|string',
+            'movimiento' => 'required|string',
             'cantidad' => 'required|numeric|min:0'
             // Agrega esta línea
         ];

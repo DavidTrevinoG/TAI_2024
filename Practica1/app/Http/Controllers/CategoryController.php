@@ -82,6 +82,12 @@ class CategoryController extends Controller
     // Función para eliminar una categoría
     public function destroy(Category $category): RedirectResponse
     {
+
+        if ($category->products()->count() > 0) {
+            return redirect()->route('categories.index')
+                ->with('error', 'Categoría no puede ser eliminada porque tiene productos asociados.');
+        }
+
         $category->delete();
 
         return redirect()->route('categories.index')

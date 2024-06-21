@@ -20,7 +20,7 @@ class InventariosController extends Controller
     public function index(): View
     {
         return view('inventarios.index', [
-            'Inventarios' => Inventarios::latest()->paginate()
+            'inventarios' => Inventarios::latest()->paginate()
         ]);
     }
 
@@ -31,9 +31,8 @@ class InventariosController extends Controller
     // Función para crear un nuevo inventario
     public function create(): View
     {
-        $categories = Category::all();
         $products = Product::all();
-        return view('inventarios.create', compact('categories', 'products'));
+        return  view('inventarios.create', compact('products'));
     }
 
     /**

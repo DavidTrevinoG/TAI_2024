@@ -90,6 +90,12 @@ class ProductController extends Controller
     // Función para eliminar un producto
     public function destroy(Product $product): RedirectResponse
     {
+
+        if ($product->inventarios()->count() > 0) {
+            return redirect()->route('products.index')
+                ->with('error', 'Producto no puede ser eliminado porque tiene inventarios asociados.');
+        }
+
         $product->delete();
 
         return redirect()->route('products.index')

@@ -15,25 +15,13 @@
                     @csrf
 
                     <div class="mb-4">
-                        <label for="producto_id" class="block text-sm font-medium text-gray-700">Producto</label>
-                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('producto_id') border-red-500 @enderror" id="producto_id" name="producto_id">
+                        <label for="id_producto" class="block text-sm font-medium text-gray-700">Producto</label>
+                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('id_productos') border-red-500 @enderror" id="id_productos" name="id_productos">
                             @foreach($products as $product)
-                            <option value="{{ $product->id }}" {{ old('producto_id') == $product->id ? 'selected' : '' }}>{{ $product->name }}</option>
+                            <option value="{{ $product->id }}" {{ old('id_productos') == $product->id ? 'selected' : '' }}>{{ $product->nombre }}</option>
                             @endforeach
                         </select>
-                        @error('producto_id')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="mb-4">
-                        <label for="category_id" class="block text-sm font-medium text-gray-700">Categoría</label>
-                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('category_id') border-red-500 @enderror" id="category_id" name="category_id">
-                            @foreach($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                            @endforeach
-                        </select>
-                        @error('category_id')
+                        @error('id_productos')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
@@ -63,16 +51,16 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="tipo_movimiento" class="block text-sm font-medium text-gray-700">Tipo de Movimiento</label>
-                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('tipo_movimiento') border-red-500 @enderror" id="tipo_movimiento" name="tipo_movimiento">{{ old('tipo_movimiento') }}</textarea>
-                        @error('tipo_movimiento')
+                        <label for="movimiento" class="block text-sm font-medium text-gray-700">Tipo de Movimiento</label>
+                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('movimiento') border-red-500 @enderror" id="movimiento" name="movimiento">{{ old('movimiento') }}</textarea>
+                        @error('movimiento')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="mb-4">
                         <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
-                        <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror" id="cantidad" name="cantidad">{{ old('cantidad') }}</textarea>
+                        <input type="number" class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror" id="cantidad" name="cantidad">{{ old('cantidad') }}</>
                         @error('cantidad')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

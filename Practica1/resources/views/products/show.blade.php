@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-span-2">
                         <label for="category" class="block text-sm font-medium text-gray-700"><strong>Categoría:</strong></label>
-                        <p class="mt-1">{{ $product->id_categorias }}</p>
+                        <p class="mt-1">{{ $product->category->nombre }}</p>
                     </div>
                     <div class="col-span-2">
                         <label for="precio_venta" class="block text-sm font-medium text-gray-700"><strong>Precio Venta:</strong></label>

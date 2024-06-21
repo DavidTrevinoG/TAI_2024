@@ -40,7 +40,7 @@
                         <tr>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->id }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->nombre }}</td>
-                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->id_categorias }}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->category->nombre }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->precio_venta }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->precio_compra }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->fecha_compra }}</td>

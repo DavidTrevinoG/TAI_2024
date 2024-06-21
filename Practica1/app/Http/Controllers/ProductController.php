@@ -55,7 +55,8 @@ class ProductController extends Controller
     // Función para mostrar un producto
     public function show(Product $product): View
     {
-        return view('products.show', compact('product'));
+        $categories = Category::all(); // Obtener todas las categorías
+        return view('products.show', compact('product', 'categories'));
     }
 
     /**

@@ -25,7 +25,7 @@ class Product extends Model
     // Relación uno a muchos
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class, 'id_categorias');
     }
 
     // Relación uno a muchos

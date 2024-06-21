@@ -54,7 +54,7 @@
                             <tr>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->id }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->nombre }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->email }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->correo }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->telefono }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->direccion }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->rfc }}</td>

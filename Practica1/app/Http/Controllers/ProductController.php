@@ -96,6 +96,11 @@ class ProductController extends Controller
                 ->with('error', 'Producto no puede ser eliminado porque tiene inventarios asociados.');
         }
 
+        if ($product->cotizaciones()->count() > 0) {
+            return redirect()->route('products.index')
+                ->with('error', 'Producto no puede ser eliminado porque tiene cotizaciones asociadas.');
+        }
+
         $product->delete();
 
         return redirect()->route('products.index')

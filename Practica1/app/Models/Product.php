@@ -38,4 +38,9 @@ class Product extends Model
     {
         return $this->hasMany(Cotizaciones::class, 'id_productos');
     }
+
+    public function compras()
+    {
+        return $this->hasMany(Compras::class, 'id_productos');
+    }
 }

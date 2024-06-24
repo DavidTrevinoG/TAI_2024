@@ -17,4 +17,10 @@ class Proveedores extends Model
         'telefono'
 
     ];
+
+    // Relación uno a muchos
+    public function compras()
+    {
+        return $this->hasMany(Compras::class, 'id_proveedores');
+    }
 }

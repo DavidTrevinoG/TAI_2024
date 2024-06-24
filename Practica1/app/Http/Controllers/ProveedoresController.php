@@ -80,6 +80,12 @@ class ProveedoresController extends Controller
 
     public function destroy(Proveedores $proveedore): RedirectResponse
     {
+
+        if ($proveedore->compras()->count() > 0) {
+            return redirect()->route('proveedores.index')
+                ->with('error', 'Proveedor no puede ser eliminado porque tiene compras asociadas.');
+        }
+
         $proveedore->delete();
 
         return redirect()->route('proveedores.index')

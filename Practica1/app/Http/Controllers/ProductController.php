@@ -101,6 +101,11 @@ class ProductController extends Controller
                 ->with('error', 'Producto no puede ser eliminado porque tiene cotizaciones asociadas.');
         }
 
+        if ($product->compras()->count() > 0) {
+            return redirect()->route('products.index')
+                ->with('error', 'Producto no puede ser eliminado porque tiene compras asociadas.');
+        }
+
         $product->delete();
 
         return redirect()->route('products.index')

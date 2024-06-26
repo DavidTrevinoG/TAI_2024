@@ -44,6 +44,7 @@
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Productos</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha cotizacion</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vigencia</th>
+                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comentarios</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
@@ -56,6 +57,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->productos->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->fecha_cotizacion }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->vigencia }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->cantidad }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->comentarios }}</td>
 
                             <td class="px-6 py-4 whitespace-nowrap">

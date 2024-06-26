@@ -30,9 +30,14 @@
                         <p class="mt-1">{{ $cotizacione->vigencia}}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
+                        <label for="cantidad" class="block text-sm font-medium text-gray-700"><strong>Cantidad:</strong></label>
+                        <p class="mt-1">{{ $cotizacione->cantidad}}</p>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
                         <label for="comentarios" class="block text-sm font-medium text-gray-700"><strong>Comentarios:</strong></label>
                         <p class="mt-1">{{ $cotizacione->comentarios}}</p>
                     </div>
+
                 </div>
             </div>
         </div>

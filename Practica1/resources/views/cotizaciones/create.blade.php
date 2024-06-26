@@ -51,6 +51,13 @@
                         @enderror
                     </div>
                     <div class="mb-4">
+                        <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
+                        <input type="number" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror" id="cantidad" name="cantidad" value="{{ old('cantidad') }}">
+                        @error('cantidad')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="mb-4">
                         <label for="comentarios" class="block text-sm font-medium text-gray-700">Comentarios</label>
                         <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('comentarios') border-red-500 @enderror" id="comentarios" name="comentarios">{{ old('comentarios') }}</textarea>
                         @error('comentarios')

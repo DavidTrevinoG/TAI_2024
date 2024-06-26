@@ -18,7 +18,8 @@ class Product extends Model
         'fecha_compra',
         'color',
         'descripcion_corta',
-        'descripcion_larga'
+        'descripcion_larga',
+        'existencia'
     ];
 
 

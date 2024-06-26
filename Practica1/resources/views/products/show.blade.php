@@ -45,7 +45,10 @@
                         <label for="descripcion_larga" class="block text-sm font-medium text-gray-700"><strong>Descripcion Larga:</strong></label>
                         <p class="mt-1">{{ $product->descripcion_larga }}</p>
                     </div>
-
+                    <div class="col-span-2">
+                        <label for="existencia" class="block text-sm font-medium text-gray-700"><strong>Existencia:</strong></label>
+                        <p class="mt-1">{{ $product->existencia}}</p>
+                    </div>
                 </div>
             </div>
         </div>

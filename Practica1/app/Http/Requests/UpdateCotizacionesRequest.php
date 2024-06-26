@@ -26,6 +26,7 @@ class UpdateCotizacionesRequest extends FormRequest
             'id_productos' => 'required|integer',
             'fecha_cotizacion' => 'required|date',
             'vigencia' => 'required|date',
+            'cantidad' => 'required|integer',
             'comentarios' => 'required|string'
         ];
     }

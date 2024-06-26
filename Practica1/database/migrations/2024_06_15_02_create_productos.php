@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('color');
             $table->string('descripcion_corta');
             $table->string('descripcion_larga');
+            $table->integer('existencia');
             $table->foreign('id_categorias')
                 ->references('id')
                 ->on('categories')

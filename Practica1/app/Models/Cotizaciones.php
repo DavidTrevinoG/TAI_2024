@@ -15,6 +15,7 @@ class Cotizaciones extends Model
         'id_productos',
         'fecha_cotizacion',
         'vigencia',
+        'cantidad',
         'comentarios'
     ];
 

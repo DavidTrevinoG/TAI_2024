@@ -58,8 +58,11 @@
                     </div>
 
                     <div class="mb-4">
-                        <label for="movimiento" class="block text-sm font-medium text-gray-700">Movimiento</label>
-                        <textarea class="form-input mt-1 block w-full rounded-md border-gray-300 @error('movimiento') border-red-500 @enderror" id="movimiento" name="movimiento">{{$inventario->movimiento}}</textarea>
+                        <label for="movimiento" class="block text-sm font-medium text-gray-700">Tipo de Movimiento</label>
+                        <select class="form-select mt-1 block w-full rounded-md border-gray-300 @error('movimiento') border-red-500 @enderror" id="movimiento" name="movimiento">
+                            <option value="Entrada" {{ $inventario->movimiento == "Entrada" ? 'selected' : '' }}>Entrada</option>
+                            <option value="Salida" {{ $inventario->movimiento == 'Salida' ? 'selected' : '' }}>Salida</option>
+                        </select>
                         @error('movimiento')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

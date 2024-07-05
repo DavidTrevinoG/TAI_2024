@@ -18,8 +18,7 @@ class Product extends Model
         'fecha_compra',
         'color',
         'descripcion_corta',
-        'descripcion_larga',
-        'existencia'
+        'descripcion_larga'
     ];
 
 
@@ -43,5 +42,10 @@ class Product extends Model
     public function compras()
     {
         return $this->hasMany(Compras::class, 'id_productos');
+    }
+
+    public function existencia()
+    {
+        return $this->inventarios->sum('cantidad');
     }
 }

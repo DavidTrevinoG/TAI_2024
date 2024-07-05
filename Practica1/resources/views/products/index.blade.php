@@ -61,7 +61,7 @@
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->color }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->descripcion_corta }}</td>
                             <td class="px-4 py-4 whitespace-nowrap">{{ $product->descripcion_larga }}</td><!-- Mostrar el nombre de la categoría -->
-                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->existencia}}</td>
+                            <td class="px-4 py-4 whitespace-nowrap">{{ $product->existencia()}}</td>
                             <td class="px-4 py-4 whitespace-nowrap">
                                 <form id="deleteForm" action="{{ route('products.destroy', $product->id) }}" method="post">
                                     @csrf

@@ -12,8 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_clientes');
             $table->unsignedBigInteger('id_productos');
-            $table->date('fecha_cotizacion');
-            $table->integer('vigencia');
+            $table->date('vigencia');
             $table->integer('cantidad');
             $table->integer('comentarios');
             $table->foreign('id_clientes')

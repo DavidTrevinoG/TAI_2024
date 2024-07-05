@@ -13,7 +13,6 @@ class Cotizaciones extends Model
     protected $fillable = [
         'id_clientes',
         'id_productos',
-        'fecha_cotizacion',
         'vigencia',
         'cantidad',
         'comentarios'

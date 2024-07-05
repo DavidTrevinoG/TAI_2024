@@ -44,15 +44,8 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="fecha_cotizacion" class="block text-sm font-medium text-gray-700">Fecha cotización</label>
-                        <input type="date" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_cotizacion') border-red-500 @enderror" id="fecha_cotizacion" name="fecha_cotizacion" value="{{ $cotizacione->fecha_cotizacion }}">
-                        @error('fecha_cotizacion')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-4">
                         <label for="vigencia" class="block text-sm font-medium text-gray-700">Vigencia</label>
-                        <input type="date" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('vigencia') border-red-500 @enderror" id="vigencia" name="vigencia" value="{{ $cotizacione->vigencia }}">
+                        <input type="date" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('vigencia') border-red-500 @enderror" id="vigencia" name="vigencia" value="{{ $cotizacione->vigencia }}" min="{{ $cotizacione->created_at->format('Y-m-d') }}">
                         @error('vigencia')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

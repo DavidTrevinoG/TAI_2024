@@ -24,7 +24,6 @@ class StoreCotizacionesRequest extends FormRequest
         return [
             'id_clientes' => 'required|integer',
             'id_productos' => 'required|integer',
-            'fecha_cotizacion' => 'required|date',
             'vigencia' => 'required|date',
             'cantidad' => 'required|integer',
             'comentarios' => 'required|string'

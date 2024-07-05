@@ -23,7 +23,7 @@
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="fecha_cotizacion" class="block text-sm font-medium text-gray-700"><strong>Fecha Cotización:</strong></label>
-                        <p class="mt-1">{{ $cotizacione->fecha_cotizacion}}</p>
+                        <p class="mt-1">{{ $cotizacione->created_at}}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="vigencia" class="block text-sm font-medium text-gray-700"><strong>Vigencia:</strong></label>
@@ -36,6 +36,10 @@
                     <div class="col-span-2 sm:col-span-1">
                         <label for="comentarios" class="block text-sm font-medium text-gray-700"><strong>Comentarios:</strong></label>
                         <p class="mt-1">{{ $cotizacione->comentarios}}</p>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="comentarios" class="block text-sm font-medium text-gray-700"><strong>Costo:</strong></label>
+                        <p class="mt-1">{{ ($cotizacione->cantidad)*($cotizacione->productos->precio_venta)}}</p>
                     </div>
 
                 </div>

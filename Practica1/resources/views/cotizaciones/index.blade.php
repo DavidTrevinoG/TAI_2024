@@ -55,7 +55,7 @@
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->clientes->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->productos->nombre }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->fecha_cotizacion }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->created_at }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->vigencia }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->cantidad }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->comentarios }}</td>

@@ -29,8 +29,7 @@ class UpdateProductRequest extends FormRequest
             'fecha_compra' => 'required|date',
             'color' => 'required|string',
             'descripcion_corta' => 'required|string',
-            'descripcion_larga' => 'required|string',
-            'existencia' => 'required|integer'
+            'descripcion_larga' => 'required|string'
         ];
     }
 }

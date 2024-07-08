@@ -46,6 +46,8 @@ class Product extends Model
 
     public function existencia()
     {
-        return $this->inventarios->sum('cantidad');
+        return $this->inventarios->sum(function ($inventario) {
+            return $inventario->movimiento === 'Entrada' ? $inventario->cantidad : -$inventario->cantidad;
+        });
     }
 }

@@ -40,3 +40,4 @@ Route::resource('compras', ComprasController::class);
 Route::resource('formapago', FormaPagoController::class);
 Route::resource('vendedores', VendedoresController::class);
 Route::resource('cotizaciones', CotizacionesController::class);
+Route::get('cotizaciones/{cotizacione}/pdf', [CotizacionesController::class, 'pdf'])->name('cotizaciones.pdf');

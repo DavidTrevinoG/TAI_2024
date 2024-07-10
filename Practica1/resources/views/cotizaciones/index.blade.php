@@ -40,11 +40,9 @@
                     <thead>
                         <tr>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Clientes</th>
-                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Productos</th>
+                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cliente</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha cotizacion</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vigencia</th>
-                            <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comentarios</th>
                             <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
@@ -54,10 +52,8 @@
                         <tr>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->clientes->nombre }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->productos->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->created_at }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->vigencia }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->cantidad }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $cotizacion->comentarios }}</td>
 
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -66,6 +62,7 @@
                                     @method('DELETE')
                                     <a href="{{ route('cotizaciones.show', $cotizacion->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i>Mostrar</a>
                                     <a href="{{ route('cotizaciones.edit', $cotizacion->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i>Editar</a>
+                                    <a href="{{ route('cotizaciones.pdf', $cotizacion) }}" class="bg-green-500 hover:bg-green-700 font-bold py-1 px-2 rounded"><i class="bi bi-file-earmark-pdf"></i>PDF</a>
                                     <button id="deleteButton" type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded"><i class="bi bi-trash"></i>Eliminar</button>
                                 </form>
                             </td>

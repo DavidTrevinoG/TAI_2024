@@ -5,32 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cotizaciones extends Model
+class cotizacion_producto extends Model
 {
     use HasFactory;
 
     // Atributos que se pueden asignar de manera masiva.
     protected $fillable = [
-        'id_clientes',
+        'id_cotizaciones',
         'id_productos',
-        'vigencia',
-        'cantidad',
-        'comentarios'
+        'cantidad'
     ];
 
     // Relación uno a muchos
-    public function clientes()
+    public function cotizaciones()
     {
-        return $this->belongsTo(Clientes::class, 'id_clientes');
+        return $this->belongsTo(Cotizaciones::class, 'id_cotizaciones');
     }
 
     public function productos()
     {
         return $this->belongsTo(Product::class, 'id_productos');
-    }
-
-    public function cotizacion_producto()
-    {
-        return $this->hasMany(Cotizacion_Producto::class, 'id_cotizaciones');
     }
 }

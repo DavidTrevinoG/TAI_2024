@@ -10,24 +10,28 @@ class Ventas extends Model
     use HasFactory;
 
     protected $fillable = [
-        'producto_id',
-        'category_id',
-        'cliente_id',
-        'cantidad',
-        'fecha_venta',
+        'id_clientes',
+        'id_vendedores',
+        'id_formapago',
+        'cambio',
         'subtotal',
         'iva',
         'total'
     ];
 
-    public function producto()
+    public function vendedor()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(User::class, 'id_vendedores');
     }
 
-    public function category()
+    public function formapago()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(FormaPago::class, 'id_formapago');
+    }
+
+    public function venta_productos()
+    {
+        return $this->hasMany(Venta_Productos::class, 'id_ventas');
     }
 
     public function cliente()

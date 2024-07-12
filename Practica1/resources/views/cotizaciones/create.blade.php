@@ -25,17 +25,17 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="mb-4">
-                        <label for="id_productos" class="block text-sm font-medium text-gray-700">Producto</label>
-                        <select id="id_productos" name="id_productos" class="form-select mt-1 block w-full rounded-md border-gray-300 @error('id_productos') border-red-500 @enderror">
-                            @foreach($productos as $producto)
-                            <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
-                            @endforeach
-                        </select>
-                        @error('id_productos')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
+                        <label for="producto_search" class="block text-sm font-medium text-gray-700">Buscar Producto</label>
+                        <input type="text" id="producto_search" class="form-input mt-1 block w-full rounded-md border-gray-300" placeholder="Buscar producto" autocomplete="off">
+                        <div id="search_results" class="mt-2"></div>
                     </div>
+
+                    <div id="selected_products" class="mb-4">
+                        <h3 class="text-xl font-semibold mb-2">Productos Seleccionados</h3>
+                    </div>
+
                     <div class="mb-4">
                         <label for="vigencia" class="block text-sm font-medium text-gray-700">Vigencia</label>
                         <input type="date" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('vigencia') border-red-500 @enderror" id="vigencia" name="vigencia" value="{{ old('vigencia') }}" min="{{ date('Y-m-d') }}">
@@ -43,13 +43,7 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="mb-4">
-                        <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
-                        <input type="number" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror" id="cantidad" name="cantidad" value="{{ old('cantidad') }}">
-                        @error('cantidad')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
+
                     <div class="mb-4">
                         <label for="comentarios" class="block text-sm font-medium text-gray-700">Comentarios</label>
                         <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('comentarios') border-red-500 @enderror" id="comentarios" name="comentarios">{{ old('comentarios') }}</textarea>
@@ -57,6 +51,7 @@
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+
                     <div class="mb-4">
                         <button id="submitButton" type="submit" class="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Agregar Cotización</button>
                     </div>
@@ -68,6 +63,82 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('producto_search');
+        const searchResults = document.getElementById('search_results');
+        const selectedProductsContainer = document.getElementById('selected_products');
+
+        let selectedProducts = [];
+
+        searchInput.addEventListener('input', function() {
+            const searchValue = searchInput.value.trim();
+
+            if (searchValue.length > 0) {
+                fetch(`/search-productos?search=${searchValue}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let resultsHtml = '';
+
+                        data.forEach(producto => {
+                            resultsHtml += `<div class="p-2 border-b border-gray-200 cursor-pointer" data-id="${producto.id}" data-nombre="${producto.nombre}">${producto.nombre}</div>`;
+                        });
+
+                        searchResults.innerHTML = resultsHtml;
+
+                        const resultItems = searchResults.querySelectorAll('.p-2');
+
+                        resultItems.forEach(item => {
+                            item.addEventListener('click', function() {
+                                const productoId = item.dataset.id;
+                                const productoNombre = item.dataset.nombre;
+                                const cantidadInput = document.createElement('input');
+                                const removeButton = document.createElement('button');
+
+                                const productExists = selectedProducts.find(product => product.id === productoId);
+
+                                if (productExists) {
+                                    alert('El producto ya ha sido agregado.');
+                                    return;
+                                }
+
+                                const productElement = document.createElement('div');
+                                productElement.classList.add('flex', 'items-center', 'mb-2');
+                                productElement.innerHTML = `<span class="mr-4">${productoNombre}</span>`;
+
+                                cantidadInput.type = 'number';
+                                cantidadInput.name = `productos[${productoId}][cantidad]`;
+                                cantidadInput.classList.add('form-input', 'mr-4', 'w-40', 'rounded-md', 'border-gray-300');
+                                cantidadInput.required = true;
+                                cantidadInput.placeholder = 'Cantidad';
+
+                                removeButton.type = 'button';
+                                removeButton.innerText = 'Eliminar';
+                                removeButton.classList.add('py-1', 'px-2', 'border', 'border-transparent', 'rounded-md', 'shadow-sm', 'text-sm', 'font-medium', 'bg-red-600', 'hover:bg-red-700', 'focus:outline-none', 'focus:ring-2', 'focus:ring-offset-2', 'focus:ring-red-500');
+                                removeButton.addEventListener('click', function() {
+                                    productElement.remove();
+                                    selectedProducts = selectedProducts.filter(product => product.id !== productoId);
+                                });
+
+                                productElement.appendChild(cantidadInput);
+                                productElement.appendChild(removeButton);
+
+                                selectedProductsContainer.appendChild(productElement);
+
+                                selectedProducts.push({
+                                    id: productoId,
+                                    nombre: productoNombre
+                                });
+
+                                searchInput.value = '';
+                                searchInput.dataset.id = '';
+                                searchResults.innerHTML = '';
+                            });
+                        });
+                    });
+            } else {
+                searchResults.innerHTML = '';
+            }
+        });
+
         const form = document.getElementById('cotizacionesForm');
         const submitButton = document.getElementById('submitButton');
 

@@ -22,11 +22,10 @@ class UpdateVentasRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'producto_id' => 'required|exists:products,id',
-            'category_id' => 'required|exists:categories,id',
-            'cliente_id' => 'required|exists:clientes,id',
-            'cantidad' => 'required|numeric|min:1',
-            'fecha_venta' => 'required|date',
+            'id_clientes' => 'required|exists:clientes,id',
+            'id_vendedores' => 'required|exists:users,id',
+            'id_formapago' => 'required|exists:formapagos,id',
+            'cambio' => 'required|numeric|min:0',
             'subtotal' => 'required|numeric|min:0',
             'iva' => 'required|numeric|min:0',
             'total' => 'required|numeric|min:0'

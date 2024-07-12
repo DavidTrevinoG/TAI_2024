@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category; // Asegúrate de importar el modelo Category
 use App\Models\Clientes;
+use App\Models\Venta_Productos;
+use App\Models\Vendedores;
+use App\Models\FormaPago;
 use App\Models\Ventas;
 use App\Http\Requests\StoreVentasRequest;
 use App\Http\Requests\UpdateVentasRequest;
@@ -20,7 +23,7 @@ class VentasController extends Controller
     {
 
         return view('ventas.index', [
-            'Ventas' => Ventas::latest()->paginate()
+            'ventas' => Ventas::latest()->paginate()
         ]);
     }
 
@@ -29,10 +32,11 @@ class VentasController extends Controller
      */
     public function create(): View
     {
-        $categories = Category::all(); // Obtener todas las categorías
+        $vendedores = Vendedores::all(); // Obtener todas las categorías
         $products = Product::all();
         $clientes = Clientes::all();
-        return view('ventas.create', compact('categories', 'products', 'clientes'));
+        $forma_pago = FormaPago::all();
+        return view('ventas.create', compact('vendedores', 'products', 'clientes', 'forma_pago'));
     }
 
     /**
@@ -59,11 +63,11 @@ class VentasController extends Controller
      */
     public function edit(Ventas $ventas): View
     {
-        $categories = Category::all(); // Obtener todas las categorías
+        $vendedores = Vendedores::all();
         $products = Product::all();
         $clientes = Clientes::all();
 
-        return view('ventas.edit', compact('categories', 'products', 'clientes'));
+        return view('ventas.edit', compact('vendedores', 'products', 'clientes'));
     }
 
     /**

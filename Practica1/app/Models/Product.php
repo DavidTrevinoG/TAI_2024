@@ -50,4 +50,14 @@ class Product extends Model
             return $inventario->movimiento === 'Entrada' ? $inventario->cantidad : -$inventario->cantidad;
         });
     }
+
+    public function cotizacion_producto()
+    {
+        return $this->hasMany(Cotizacion_Producto::class, 'id_productos');
+    }
+
+    public function venta_producto()
+    {
+        return $this->hasMany(Venta_Productos::class, 'id_productos');
+    }
 }

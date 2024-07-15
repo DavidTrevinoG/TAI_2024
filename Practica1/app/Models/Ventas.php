@@ -12,7 +12,7 @@ class Ventas extends Model
     protected $fillable = [
         'id_clientes',
         'id_vendedores',
-        'id_formapago',
+        'id_formapagos',
         'cambio',
         'subtotal',
         'iva',
@@ -21,12 +21,12 @@ class Ventas extends Model
 
     public function vendedor()
     {
-        return $this->belongsTo(User::class, 'id_vendedores');
+        return $this->belongsTo(Vendedores::class, 'id_vendedores');
     }
 
     public function formapago()
     {
-        return $this->belongsTo(FormaPago::class, 'id_formapago');
+        return $this->belongsTo(FormaPago::class, 'id_formapagos');
     }
 
     public function venta_productos()
@@ -36,6 +36,6 @@ class Ventas extends Model
 
     public function cliente()
     {
-        return $this->belongsTo(Clientes::class);
+        return $this->belongsTo(Clientes::class, 'id_clientes');
     }
 }

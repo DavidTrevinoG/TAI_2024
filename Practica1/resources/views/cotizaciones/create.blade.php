@@ -73,7 +73,7 @@
             const searchValue = searchInput.value.trim();
 
             if (searchValue.length > 0) {
-                fetch(`/search-productos?search=${searchValue}`)
+                fetch(`/TAI_2024/Practica1/public/search-productos?search=${searchValue}`)
                     .then(response => response.json())
                     .then(data => {
                         let resultsHtml = '';

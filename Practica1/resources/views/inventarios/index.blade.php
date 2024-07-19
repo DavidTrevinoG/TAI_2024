@@ -20,6 +20,10 @@
                     <i class="bi bi-plus-circle mr-2"></i> Agregar nuevo inventario
                 </a>
 
+                <a href="{{ route('inventarios.pdf.all') }}" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded inline-flex items-center mb-4">
+                    <i class="bi bi-plus-circle mr-2"></i> Reportes
+                </a>
+
 
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>

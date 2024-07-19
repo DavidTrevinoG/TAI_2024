@@ -8,6 +8,7 @@ use App\Models\Venta_Productos;
 use App\Models\Vendedores;
 use App\Models\FormaPago;
 use App\Models\Ventas;
+use App\Models\Inventarios;
 use App\Http\Requests\UpdateVentasRequest;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
@@ -30,6 +31,146 @@ class VentasController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function pdfAll()
+    {
+        $ventas = Ventas::with('venta_productos.productos')->get();
+        $pdf = app('dompdf.wrapper');
+
+        $html = '
+        <html>
+        <head>
+            <style>
+                @font-face {
+                    font-family: \'Roboto\';
+                    font-style: normal;
+                    font-weight: 400;
+                    src: url("Roboto-Regular.ttf") format("truetype");
+                }
+                body {
+                    font-family: \'Roboto\', sans-serif;
+                    margin: 20px;
+                }
+                h1 {
+                    text-align: center;
+                    color: #0101f2;
+                }
+                .header, .footer {
+                    width: 100%;
+                    text-align: center;
+                    position: fixed;
+                }
+                .header {
+                    top: 0px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                }
+                .footer {
+                    bottom: 0px;
+                    font-size: 12px;
+                    color: #777;
+                }
+                .content {
+                    margin-top: 50px;
+                    margin-bottom: 50px;
+                }
+                .details {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 20px;
+                }
+                .details div {
+                    width: 48%;
+                }
+                .table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+                }
+                .table, .table th, .table td {
+                    border: 1px solid #ddd;
+                }
+                .table th, .table td {
+                    padding: 12px;
+                    text-align: left;
+                }
+                .table th {
+                    background-color: #f2f2f2;
+                    font-weight: bold;
+                    color: #333;
+                }
+                .table tr:nth-child(even) {
+                    background-color: #f9f9f9;
+                }
+                .total {
+                    text-align: right;
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-top: 20px;
+                }
+            </style>
+        </head>
+        <body>
+            <div class="header">
+                <h1>VENTAS</h1>
+            </div>
+            <div class="footer">
+                <p>© ' . date("Y") . ' Cotización</p>
+            </div>
+            <div class="content">';
+
+        foreach ($ventas as $venta) {
+            $total = 0;
+            $html .= '
+                <div>
+                    <div style="text-align: left;">
+                        <strong>Fecha:</strong> ' . $venta->created_at->format('Y-m-d') . ' <br>
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                            <th>Precio Unitario</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+
+            foreach ($venta->venta_productos as $item) {
+                $html .= '
+                        <tr>
+                            <td>' . $item->productos->nombre . '</td>
+                            <td>' . $item->cantidad . '</td>
+                            <td>' . number_format($item->productos->precio_venta, 2) . '</td>
+                            <td>' . number_format($item->cantidad * $item->productos->precio_venta, 2) . '</td>
+                        </tr>';
+                $total += $item->cantidad * $item->productos->precio_venta;
+            }
+
+            $subtotal = $total / 1.16; // Se calcula el subtotal sin IVA
+            $iva = $total - $subtotal; // Se calcula el IVA
+            $html .= '
+                    </tbody>
+                </table>
+                <p class="total"><strong>SubTotal:</strong> ' . number_format($subtotal, 2) . '</p>
+                <p class="total"><strong>IVA(16%):</strong> ' . number_format($iva, 2) . '</p>
+                <p class="total"><strong>Total:</strong> ' . number_format($total, 2) . '</p>';
+        }
+
+        $html .= '
+            </div>
+        </body>
+        </html>';
+
+        $pdf->loadHTML($html);
+
+        return $pdf->download('todas_las_ventas_' . date("Y-m-d") . '.pdf');
+    }
+
+
 
 
     public function pdf(Ventas $venta)
@@ -165,8 +306,10 @@ class VentasController extends Controller
 
         $pdf->loadHTML($html);
 
-        return $pdf->download($venta->id . '_' . date("Y-m-d") . '_cotizacion.pdf');
+        return $pdf->download($venta->id . '_' . date("Y-m-d") . '_venta.pdf');
     }
+
+
 
 
 
@@ -176,6 +319,7 @@ class VentasController extends Controller
         $products = Product::all();
         $clientes = Clientes::all();
         $forma_pago = FormaPago::all();
+
         return view('ventas.create', compact('vendedores', 'products', 'clientes', 'forma_pago'));
     }
 
@@ -208,10 +352,21 @@ class VentasController extends Controller
         ]);
 
 
+
+
+
         foreach ($request->productos as $productoId => $productoData) {
             Venta_Productos::create([
                 'id_ventas' => $venta->id,
                 'id_productos' => $productoId,
+                'cantidad' => $productoData['cantidad'],
+            ]);
+
+            Inventarios::create([
+                'id_productos' => $productoId,
+                'fecha_salida' => now(),
+                'movimiento' => 'Salida',
+                'motivo' => 'compra',
                 'cantidad' => $productoData['cantidad'],
             ]);
         }

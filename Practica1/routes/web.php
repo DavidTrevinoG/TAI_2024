@@ -42,4 +42,7 @@ Route::resource('vendedores', VendedoresController::class);
 Route::resource('cotizaciones', CotizacionesController::class);
 Route::get('cotizaciones/{cotizacione}/pdf', [CotizacionesController::class, 'pdf'])->name('cotizaciones.pdf');
 Route::get('ventas/{venta}/pdf', [VentasController::class, 'pdf'])->name('ventas.pdf');
+Route::get('/ventas/pdf/all', [VentasController::class, 'pdfAll'])->name('ventas.pdf.all');
 Route::get('search-productos', [CotizacionesController::class, 'searchProductos'])->name('search.productos');
+Route::get('/compras/pdf/all', [ComprasController::class, 'pdfAll'])->name('compras.pdf.all');
+Route::get('/inventarios/pdf/all', [InventariosController::class, 'pdfAll'])->name('inventarios.pdf.all');

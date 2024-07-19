@@ -35,6 +35,10 @@
                     <i class="bi bi-plus-circle mr-2"></i> Vender
                 </a>
 
+                <a href="{{ route('ventas.pdf.all') }}" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded inline-flex items-center mb-4">
+                    <i class="bi bi-plus-circle mr-2"></i> Reporte
+                </a>
+
                 <!-- Tabla de listado de Proveedores -->
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>

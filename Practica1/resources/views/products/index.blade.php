@@ -43,8 +43,6 @@
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Compra</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Compra</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
-                                <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Corta</th>
-                                <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción Larga</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Existencia</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                             </tr>
@@ -60,8 +58,6 @@
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->precio_compra }}</td>
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->fecha_compra }}</td>
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->color }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">{{ $product->descripcion_corta }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">{{ $product->descripcion_larga }}</td><!-- Mostrar el nombre de la categoría -->
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->existencia()}}</td>
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <form id="deleteForm" action="{{ route('products.destroy', $product->id) }}" method="post">

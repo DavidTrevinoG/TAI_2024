@@ -42,9 +42,6 @@
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefono</th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Direccion</th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">RFC</th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Razón Social</th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Código Postal</th>
-                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Regimen Fiscal</th>
                                 <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                             </tr>
                         </thead>
@@ -58,9 +55,6 @@
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->telefono }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->direccion }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->rfc }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->razon_social }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->codigo_postal }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap">{{ $cliente->regimen_fiscal }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <form id="deleteForm" action="{{ route('clientes.destroy', $cliente->id) }}" method="post">
                                         @csrf

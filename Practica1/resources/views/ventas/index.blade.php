@@ -68,6 +68,7 @@
                                     @method('DELETE')
                                     <a href="{{ route('ventas.show', $venta->id) }}" class="bg-yellow-500 hover:bg-yellow-700 font-bold py-1 px-2 rounded"><i class="bi bi-eye"></i>Mostrar</a>
                                     <a href="{{ route('ventas.edit', $venta->id) }}" class="bg-blue-500 hover:bg-blue-700 font-bold py-1 px-2 rounded"><i class="bi bi-pencil-square"></i>Editar</a>
+                                    <a href="{{ route('ventas.pdf', $venta) }}" class="bg-green-500 hover:bg-green-700 font-bold py-1 px-2 rounded"><i class="bi bi-file-earmark-pdf"></i>PDF</a>
                                     <button type="submit" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded" onclick="return confirm('¿Estás seguro de eliminar esta venta?');">
                                         <i class="bi bi-trash"></i>Eliminar
                                     </button>

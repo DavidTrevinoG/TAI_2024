@@ -14,7 +14,7 @@ use App\Http\Controllers\ComprasController;
 use App\Http\Controllers\FormaPagoController;
 use App\Http\Controllers\VendedoresController;
 use App\Http\Controllers\CotizacionesController;
-
+use App\Models\Ventas;
 
 Route::get('/', function () {
     return view('welcome');
@@ -41,4 +41,5 @@ Route::resource('formapago', FormaPagoController::class);
 Route::resource('vendedores', VendedoresController::class);
 Route::resource('cotizaciones', CotizacionesController::class);
 Route::get('cotizaciones/{cotizacione}/pdf', [CotizacionesController::class, 'pdf'])->name('cotizaciones.pdf');
+Route::get('ventas/{venta}/pdf', [VentasController::class, 'pdf'])->name('ventas.pdf');
 Route::get('search-productos', [CotizacionesController::class, 'searchProductos'])->name('search.productos');

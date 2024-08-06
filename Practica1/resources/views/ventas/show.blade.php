@@ -1,6 +1,27 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    .image-container {
+        width: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        height: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .img-responsive {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        /* Mantiene la relación de aspecto y cubre el contenedor sin deformar la imagen */
+    }
+</style>
+
 <div class="container mx-auto mt-8">
     <div class="md:w-3/4 mx-auto">
 
@@ -34,6 +55,7 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
@@ -43,6 +65,15 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach($venta->venta_productos as $producto)
                         <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                @if($producto->productos->image)
+                                <div class="image-container">
+                                    <img src="{{ asset('storage/' . $producto->productos->image) }}" alt="{{ $producto->productos->nombre }}" class="img-responsive rounded">
+                                </div>
+                                @else
+                                <span>No Imagen</span>
+                                @endif
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $producto->productos->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $producto->cantidad }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">${{ number_format($producto->productos->precio_venta, 2) }}</td>

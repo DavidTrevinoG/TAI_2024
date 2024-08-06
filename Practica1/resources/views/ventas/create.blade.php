@@ -1,6 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    .image-container {
+        width: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        height: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .img-responsive {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        /* Mantiene la relación de aspecto y cubre el contenedor sin deformar la imagen */
+    }
+</style>
+
+
 <div class="container mx-auto mt-8">
     <div class="flex md:w-4/4 mx-auto bg-white p-6 rounded-lg shadow-md">
 
@@ -53,6 +75,7 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
@@ -105,7 +128,14 @@
                         let resultsHtml = '';
 
                         data.forEach(producto => {
-                            resultsHtml += `<div class="p-2 border-b border-gray-200 cursor-pointer" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio_venta}">${producto.nombre}</div>`;
+                            resultsHtml += `
+                                <div class="p-2 border-b border-gray-200 cursor-pointer flex items-center" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio_venta}">
+                                     <div class="image-container">
+                                        <img src="{{ asset('storage') }}/${producto.image}" alt="${producto.nombre}"  class="img-responsive rounded">
+                                    </div>
+                                        <span>${producto.nombre}</span>
+                                </div>
+                            `;
                         });
 
                         searchResults.innerHTML = resultsHtml;
@@ -117,6 +147,7 @@
                                 const productoId = item.dataset.id;
                                 const productoNombre = item.dataset.nombre;
                                 const productoPrecio = parseFloat(item.dataset.precio);
+                                const productoImage = item.querySelector('img').src;
 
                                 const productExists = selectedProducts.find(product => product.id === productoId);
 
@@ -127,6 +158,11 @@
 
                                 const tr = document.createElement('tr');
                                 tr.innerHTML = `
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="image-container">  
+                                            <img src="${productoImage}" alt="${productoNombre}"  class="img-responsive rounded">
+                                        </div>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">${productoNombre}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="number" name="productos[${productoId}][cantidad]" class="form-input w-16" value="1" min="1" data-precio="${productoPrecio}">
@@ -155,20 +191,17 @@
                                 cantidadInput.addEventListener('input', function() {
                                     const cantidad = parseInt(cantidadInput.value);
                                     const subtotalElement = tr.querySelector('.subtotal');
-                                    const subtotal = cantidad * productoPrecio;
-
+                                    const precioUnitario = parseFloat(cantidadInput.dataset.precio);
+                                    const subtotal = precioUnitario * cantidad;
                                     subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
                                     updateTotal();
                                 });
 
                                 eliminarButton.addEventListener('click', function() {
-                                    tr.remove();
+                                    cartItems.removeChild(tr);
                                     selectedProducts = selectedProducts.filter(product => product.id !== productoId);
                                     updateTotal();
                                 });
-
-                                searchInput.value = '';
-                                searchResults.innerHTML = '';
                             });
                         });
                     });

@@ -17,7 +17,7 @@
                     <h2 class="text-2xl font-semibold">Editar Producto</h2>
                     <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">&larr; Atrás</a>
                 </div>
-                <form action="{{ route('products.update', $product->id) }}" method="post">
+                <form action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data" method="post">
                     @csrf
                     @method("PUT")
 
@@ -85,6 +85,14 @@
                         <label for="descripcion_larga" class="block text-sm font-medium text-gray-700">Descripción Larga</label>
                         <textarea class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('descripcion_larga') border-red-500 @enderror" id="descripcion_larga" name="descripcion_larga">{{ $product->descripcion_larga }}</textarea>
                         @error('descripcion_larga')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label>
+                        <input type="file" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('color') border-red-500 @enderror" id=" image" name="image">{{ $product->image }}</>
+                        @error('image')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>

@@ -2,25 +2,39 @@
 
 @section('content')
 
+<style>
+    .image-container {
+        width: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        height: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .img-responsive {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        /* Mantiene la relación de aspecto y cubre el contenedor sin deformar la imagen */
+    }
+</style>
+
 <div class="container mx-auto mt-8">
     <div class="md:w-4/4 mx-auto">
 
-        @session('success')
+        @if (session('success'))
         <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-            <span class="block sm:inline">{{ $value }}</span>
+            <span class="block sm:inline">{{ session('success') }}</span>
         </div>
-        @endsession
+        @endif
 
         @if (session('error'))
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             {{ session('error') }}
             <br>
-        </div>
-        @endif
-
-        @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
         </div>
         @endif
 
@@ -43,10 +57,10 @@
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Compra</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha Compra</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
+                                <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Existencia</th>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                             </tr>
-
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse ($products as $product)
@@ -58,7 +72,16 @@
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->precio_compra }}</td>
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->fecha_compra }}</td>
                                 <td class="px-4 py-4 whitespace-nowrap">{{ $product->color }}</td>
-                                <td class="px-4 py-4 whitespace-nowrap">{{ $product->existencia()}}</td>
+                                <td class="px-4 py-4 whitespace-nowrap">
+                                    @if($product->image)
+                                    <div class="image-container">
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nombre }}" class="img-responsive rounded">
+                                    </div>
+                                    @else
+                                    <span>No Imagen</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-4 whitespace-nowrap">{{ $product->existencia() }}</td>
                                 <td class="px-4 py-4 whitespace-nowrap">
                                     <form id="deleteForm" action="{{ route('products.destroy', $product->id) }}" method="post">
                                         @csrf
@@ -70,9 +93,8 @@
                                 </td>
                             </tr>
                             @empty
-
                             <tr>
-                                <td colspan="6" class="text-center">No hay productos.</td>
+                                <td colspan="10" class="text-center">No hay productos.</td>
                             </tr>
                             @endforelse
                         </tbody>

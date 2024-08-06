@@ -16,6 +16,12 @@ a:not(.logo-link):hover {
     position: relative;
 }
 
+.img-responsive {
+    width: 100%; /* O el tamaño específico que necesites */
+    height: auto; /* Mantiene la altura en proporción con el ancho */
+    object-fit: cover; /* Asegura que la imagen cubra el contenedor, recortando si es necesario */
+}
+
 a:not(.logo-link):hover::after {
     content: '';
     position: absolute;

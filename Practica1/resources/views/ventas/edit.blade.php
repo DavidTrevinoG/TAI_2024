@@ -1,6 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
+
+<style>
+    .image-container {
+        width: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        height: 100px;
+        /* Ajusta el tamaño del contenedor según sea necesario */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .img-responsive {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        /* Mantiene la relación de aspecto y cubre el contenedor sin deformar la imagen */
+    }
+</style>
+
+
 <div class="container mx-auto mt-8">
     <div class="flex md:w-4/4 mx-auto bg-white p-6 rounded-lg shadow-md">
 
@@ -54,6 +76,7 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
@@ -64,6 +87,11 @@
                     <tbody id="cart-items" class="bg-white divide-y divide-gray-200">
                         @foreach($venta->venta_productos as $producto)
                         <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="image-container">
+                                    <img src="{{ asset('storage')."/".$producto->productos->image}}" alt="{{$producto->productos->image}}" class="img-responsive rounded">
+                                </div>
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $producto->productos->nombre }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <input type="number" name="productos[{{ $producto->productos->id }}][cantidad]" class="form-input w-16" value="{{ $producto->cantidad }}" min="1" data-precio="{{ $producto->productos->precio_venta }}">
@@ -118,7 +146,11 @@
                         let resultsHtml = '';
 
                         data.forEach(producto => {
-                            resultsHtml += `<div class="p-2 border-b border-gray-200 cursor-pointer" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio_venta}">${producto.nombre}</div>`;
+                            resultsHtml += `<div class="p-2 border-b border-gray-200 cursor-pointer flex items-center" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio_venta}">
+                                     <div class="image-container">
+                                    <img src="{{ asset('storage') }}/${producto.image}" alt="${producto.nombre}"  class="img-responsive rounded"></div>
+                                    <span>${producto.nombre}</span>
+                                </div>`;
                         });
 
                         searchResults.innerHTML = resultsHtml;
@@ -130,6 +162,7 @@
                                 const productoId = item.dataset.id;
                                 const productoNombre = item.dataset.nombre;
                                 const productoPrecio = parseFloat(item.dataset.precio);
+                                const productoImage = item.querySelector('img').src;
 
                                 const productExists = selectedProducts.find(product => product.id === productoId);
 
@@ -140,6 +173,11 @@
 
                                 const tr = document.createElement('tr');
                                 tr.innerHTML = `
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="image-container">  
+                                         <img src="${productoImage}" alt="${productoNombre}"  class="img-responsive rounded">
+                                        </div>
+                                    </td>
                                     <td class="px-6 py-4 whitespace-nowrap">${productoNombre}</td>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <input type="number" name="productos[${productoId}][cantidad]" class="form-input w-16" value="1" min="1" data-precio="${productoPrecio}">
@@ -196,47 +234,84 @@
 
         function updateTotal() {
             let total = 0;
-
-            const quantityInputs = cartItems.querySelectorAll('input[type="number"]');
-
-            quantityInputs.forEach(input => {
-                const quantity = parseInt(input.value);
-                const price = parseFloat(input.dataset.precio);
-                total += quantity * price;
+            selectedProducts.forEach(product => {
+                const cantidadInput = document.querySelector(`input[name="productos[${product.id}][cantidad]"]`);
+                const cantidad = parseInt(cantidadInput.value);
+                total += product.precio * cantidad;
             });
 
-            totalAmountElement.innerText = total.toFixed(2);
-            totalInput.value = total.toFixed(2);
+            totalAmountElement.textContent = total.toFixed(2);
         }
 
-        cartItems.addEventListener('input', function(event) {
-            if (event.target.tagName === 'INPUT' && event.target.type === 'number') {
-                const quantity = parseInt(event.target.value);
-                const price = parseFloat(event.target.dataset.precio);
-                const subtotal = quantity * price;
-
-                const tr = event.target.closest('tr');
-                tr.querySelector('.subtotal').innerText = `$${subtotal.toFixed(2)}`;
-
-                updateTotal();
-            }
-        });
-
         submitSaleButton.addEventListener('click', function() {
-            Swal.fire({
-                title: '¿Estás seguro?',
-                text: "¿Deseas actualizar esta venta?",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Sí, actualizar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
-            });
+            const formaPagoSelect = document.getElementById('id_formapagos');
+            const formaPago = formaPagoSelect.options[formaPagoSelect.selectedIndex].text.toLowerCase();
+            const totalAmount = parseFloat(totalAmountElement.textContent);
+            totalInput.value = totalAmount.toFixed(2);
+
+            if (formaPago === 'efectivo') {
+                Swal.fire({
+                    title: 'Ingresar dinero recibido',
+                    input: 'number',
+                    inputAttributes: {
+                        min: 0,
+                        step: 0.01
+                    },
+                    showCancelButton: true,
+                    confirmButtonText: 'Vender',
+                    cancelButtonText: 'Cancelar',
+                    inputValidator: (value) => {
+                        if (!value || parseFloat(value) < totalAmount) {
+                            return `El monto ingresado debe ser mayor o igual al total: $${totalAmount.toFixed(2)}`;
+                        }
+                    }
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const dineroIngresado = parseFloat(result.value);
+                        const cambio = dineroIngresado - totalAmount;
+                        cambioInput.value = cambio.toFixed(2);
+
+                        Swal.fire({
+                            title: 'Cambio',
+                            text: `El cambio es: $${cambio.toFixed(2)}`,
+                            icon: 'success'
+                        }).then(() => {
+                            Swal.fire({
+                                title: 'Venta realizada',
+                                text: 'La venta se ha realizado con éxito.',
+                                icon: 'success'
+                            }).then(() => {
+                                form.submit();
+                            });
+
+                        });
+                    }
+                });
+
+            } else {
+                cambioInput.value = '0.00';
+                Swal.fire({
+                    title: 'Confirmar venta',
+                    text: 'Por favor, confirme que ha realizado el pago con tarjeta u otro método.',
+                    icon: 'info',
+                    showCancelButton: true,
+                    confirmButtonText: 'Confirmar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    Swal.fire({
+                        title: 'Venta realizada',
+                        text: 'La venta se ha realizado con éxito.',
+                        icon: 'success'
+                    }).then(() => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+
+                });
+
+            }
+
         });
     });
 </script>

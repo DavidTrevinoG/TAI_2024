@@ -7,7 +7,9 @@ use App\Models\Category; // Asegúrate de importar el modelo Category
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -40,10 +42,42 @@ class ProductController extends Controller
      */
 
     // Función para guardar el nuevo producto
-    public function store(StoreProductRequest $request): RedirectResponse
+    public function store(Request $request): RedirectResponse
     {
-        Product::create($request->validated());
+        // Validar la solicitud
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'id_categorias' => 'required|integer',
+            'precio_venta' => 'required|numeric',
+            'precio_compra' => 'required|numeric',
+            'fecha_compra' => 'required|date',
+            'color' => 'nullable|string|max:255',
+            'descripcion_corta' => 'nullable|string',
+            'descripcion_larga' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
+        ]);
 
+        // Inicializa la ruta de la imagen
+        $imagePath = null;
+
+        if ($request->hasFile('image')) {
+            // Obtener el archivo de la solicitud
+            $image = $request->file('image');
+
+            // Generar un nombre único para el archivo
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Almacenar el archivo en el disco local
+            $imagePath = $image->storeAs('images', $imageName, 'public');
+        }
+
+        // Agrega la URL de la imagen al array de datos si se cargó una imagen
+        $validated['image'] = $imagePath;
+
+        // Crear el producto con los datos validados y la URL de la imagen
+        Product::create($validated);
+
+        // Redirigir a la lista de productos con un mensaje de éxito
         return redirect()->route('products.index')
             ->withSuccess('Nuevo producto agregado.');
     }
@@ -75,13 +109,53 @@ class ProductController extends Controller
      */
 
     // Función para actualizar un producto
-    public function update(UpdateProductRequest $request, Product $product): RedirectResponse
-    {
-        $product->update($request->validated());
 
-        return redirect()->back()
-            ->withSuccess('Product is updated successfully.');
+    public function update(Request $request, $id): RedirectResponse
+    {
+        // Validar la solicitud
+        $validated = $request->validate([
+            'nombre' => 'required|string|max:255',
+            'id_categorias' => 'required|integer',
+            'precio_venta' => 'required|numeric',
+            'precio_compra' => 'required|numeric',
+            'fecha_compra' => 'required|date',
+            'color' => 'nullable|string|max:255',
+            'descripcion_corta' => 'nullable|string',
+            'descripcion_larga' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
+        ]);
+
+        // Encontrar el producto que se va a actualizar
+        $product = Product::findOrFail($id);
+
+        // Inicializa la ruta de la imagen
+        $imagePath = $product->image;
+
+        // Verificar si se ha subido una nueva imagen
+        if ($request->hasFile('image')) {
+            // Obtener el archivo de la solicitud
+            $image = $request->file('image');
+
+            // Generar un nombre único para el archivo
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+
+            // Almacenar el archivo en el disco local
+            $imagePath = $image->storeAs('images', $imageName, 'public');
+
+            // Eliminar la imagen antigua si existe
+            if ($product->image && Storage::exists('public/' . $product->image)) {
+                Storage::delete('public/' . $product->image);
+            }
+        }
+
+        // Actualizar el producto con los datos validados y la nueva URL de la imagen
+        $product->update(array_merge($validated, ['image' => $imagePath]));
+
+        // Redirigir a la lista de productos con un mensaje de éxito
+        return redirect()->route('products.index')
+            ->withSuccess('Producto actualizado con éxito.');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -49,6 +49,14 @@
                         <label for="existencia" class="block text-sm font-medium text-gray-700"><strong>Existencia:</strong></label>
                         <p class="mt-1">{{ $product->existencia()}}</p>
                     </div>
+                    <div class="col-span-2">
+                        <label for="image"><strong>Imagen:</strong></label>
+                        @if($product->image)
+                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->nombre }}" id="image" name="image" class="w-16 h-16 object-cover rounded">
+                        @else
+                        <span>No Imagen</span>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

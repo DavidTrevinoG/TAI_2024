@@ -75,12 +75,14 @@
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead>
                         <tr>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Unitario</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">IVA</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
+                            <th scope="col" class="px-5 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                         </tr>
                     </thead>
                     <tbody id="cart-items" class="bg-white divide-y divide-gray-200">
@@ -88,7 +90,13 @@
                     </tbody>
                 </table>
 
-                <div class="flex justify-between items-center mt-4">
+                <div class="flex justify-between items-center mt-5">
+                    <span class="text-lg font-semibold">IVA: $<span id="iva-amount">0.00</span></span>
+                </div>
+                <div class="flex justify-between items-center mt-5">
+                    <span class="text-lg font-semibold">Subtotal: $<span id="subtotal-amount">0.00</span></span>
+                </div>
+                <div class="flex justify-between items-center mt-5">
                     <span class="text-lg font-semibold">Total: $<span id="total-amount">0.00</span></span>
                     <button id="submit-sale" type="button" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded">Vender</button>
                 </div>
@@ -112,6 +120,8 @@
         const searchResults = document.getElementById('search_results');
         const cartItems = document.getElementById('cart-items');
         const totalAmountElement = document.getElementById('total-amount');
+        const subtotalAmountElement = document.getElementById('subtotal-amount');
+        const ivaAmountElement = document.getElementById('iva-amount');
         const form = document.getElementById('ventasForm');
         const submitSaleButton = document.getElementById('submit-sale');
         const cambioInput = document.getElementById('cambio');
@@ -127,13 +137,23 @@
                     .then(data => {
                         let resultsHtml = '';
 
+
+
+
+
                         data.forEach(producto => {
+                            var nombre = producto.nombre;
+
+                            if (parseInt(producto.existencia) == 0) {
+                                nombre = nombre + "&nbsp;&nbsp;  <span style='color: red;'>(Fuera de Existencia)</span>";
+                            }
+
                             resultsHtml += `
-                                <div class="p-2 border-b border-gray-200 cursor-pointer flex items-center" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio_venta}">
+                                <div class="p-2 border-b border-gray-200 cursor-pointer flex items-center" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio_venta}" data-existencia="${producto.existencia}">
                                      <div class="image-container">
                                         <img src="{{ asset('storage') }}/${producto.image}" alt="${producto.nombre}"  class="img-responsive rounded">
                                     </div>
-                                        <span>${producto.nombre}</span>
+                                        <span>${nombre}</span>
                                 </div>
                             `;
                         });
@@ -144,10 +164,16 @@
 
                         resultItems.forEach(item => {
                             item.addEventListener('click', function() {
+                                const existencia = item.dataset.existencia;
                                 const productoId = item.dataset.id;
                                 const productoNombre = item.dataset.nombre;
                                 const productoPrecio = parseFloat(item.dataset.precio);
                                 const productoImage = item.querySelector('img').src;
+                                const value = 1;
+
+                                if (existencia == 0) {
+                                    value = 0;
+                                }
 
                                 const productExists = selectedProducts.find(product => product.id === productoId);
 
@@ -158,18 +184,20 @@
 
                                 const tr = document.createElement('tr');
                                 tr.innerHTML = `
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-5 py-4 whitespace-nowrap">
                                         <div class="image-container">  
                                             <img src="${productoImage}" alt="${productoNombre}"  class="img-responsive rounded">
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">${productoNombre}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <input type="number" name="productos[${productoId}][cantidad]" class="form-input w-16" value="1" min="1" data-precio="${productoPrecio}">
+                                    <td class="px-5 py-4 whitespace-nowrap">${productoNombre}</td>
+                                    <td class="px-5 py-4 whitespace-nowrap">
+                                        <input type="number" name="productos[${productoId}][cantidad]" class="form-input w-16" value="${value}" min="1" max="${existencia}" data-precio="${productoPrecio}">
                                     </td>
-                                    <td class="px-6 py-4 whitespace-nowrap">$${productoPrecio.toFixed(2)}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap subtotal">$${productoPrecio.toFixed(2)}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td class="px-5 py-4 whitespace-nowrap">$${productoPrecio.toFixed(2)}</td>
+                                    <td class="px-5 py-4 whitespace-nowrap iva">$${(productoPrecio-(productoPrecio/1.16)).toFixed(2)}</td>
+                                    <td class="px-5 py-4 whitespace-nowrap subtotal">$${(productoPrecio/1.16).toFixed(2)}</td>
+                                    <td class="px-5 py-4 whitespace-nowrap total">$${(productoPrecio).toFixed(2)}</td>
+                                    <td class="px-5 py-4 whitespace-nowrap">
                                         <button type="button" class="bg-red-500 hover:bg-red-700 font-bold py-1 px-2 rounded eliminar">Eliminar</button>
                                     </td>
                                 `;
@@ -189,11 +217,34 @@
                                 const eliminarButton = tr.querySelector('.eliminar');
 
                                 cantidadInput.addEventListener('input', function() {
+
+                                    if (existencia == 0) {
+                                        cantidadInput.disabled = true;
+                                    }
+
+                                    if (parseInt(cantidadInput.value) > existencia) {
+                                        cantidadInput.value = existencia;
+                                    }
+
+                                    if (parseInt(cantidadInput.value) < 0) {
+                                        cantidadInput.value = 1;
+                                    }
+
+                                    if (parseInt(cantidadInput.value) == 0) {
+                                        cantidadInput.value = 1;
+                                    }
+
                                     const cantidad = parseInt(cantidadInput.value);
                                     const subtotalElement = tr.querySelector('.subtotal');
+                                    const ivaElement = tr.querySelector('.iva');
+                                    const totalElement = tr.querySelector('.total');
                                     const precioUnitario = parseFloat(cantidadInput.dataset.precio);
-                                    const subtotal = precioUnitario * cantidad;
+                                    const subtotal = (precioUnitario * cantidad) / 1.16;
+                                    const iva = (precioUnitario * cantidad) - ((precioUnitario * cantidad) / 1.16);
+                                    const total = (precioUnitario * cantidad)
+                                    ivaElement.textContent = `$${iva.toFixed(2)}`
                                     subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+                                    totalElement.textContent = `$${total.toFixed(2)}`
                                     updateTotal();
                                 });
 
@@ -219,6 +270,8 @@
             });
 
             totalAmountElement.textContent = total.toFixed(2);
+            subtotalAmountElement.textContent = (total / 1.16).toFixed(2);
+            ivaAmountElement.textContent = (total - (total / 1.16)).toFixed(2);
         }
 
         submitSaleButton.addEventListener('click', function() {

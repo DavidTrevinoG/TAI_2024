@@ -46,8 +46,27 @@
                     <i class="bi bi-plus-circle mr-2"></i> Agregar un Producto
                 </a>
 
+                <a href="{{ route('products.pdf.all') }}" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded inline-flex items-center mb-4">
+                    <i class="bi bi-plus-circle mr-2"></i> Reporte
+                </a>
+
+                <a href="{{ route('products.pdf.stock') }}" class="bg-green-500 hover:bg-green-700 font-bold py-2 px-4 rounded inline-flex items-center mb-4">
+                    <i class="bi bi-plus-circle mr-2"></i> Reporte Stock
+                </a>
+
+                <div class="mb-4">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        onkeyup="filterTable()"
+                        placeholder="Buscar en la tabla..."
+                        class="px-4 py-2 border border-gray-300 rounded-lg">
+                </div>
+
                 <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
+
+
+                    <table id="Table" class="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
                                 <th scope="col" class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
@@ -105,6 +124,26 @@
     </div>
 </div>
 <script>
+    function filterTable() {
+        // Get the input value and convert to lowercase
+        const filter = document.getElementById('searchInput').value.toLowerCase();
+        const rows = document.querySelectorAll('#Table tbody tr');
+
+        rows.forEach(row => {
+            // Get all the text content of the cells in the current row
+            const cells = row.querySelectorAll('td');
+            let found = false;
+
+            cells.forEach(cell => {
+                if (cell.textContent.toLowerCase().includes(filter)) {
+                    found = true;
+                }
+            });
+
+            // Show or hide the row based on whether it matches the filter
+            row.style.display = found ? '' : 'none';
+        });
+    }
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('deleteForm');
         const submitButton = document.getElementById('deleteButton');

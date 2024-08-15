@@ -19,6 +19,7 @@ class Product extends Model
         'color',
         'descripcion_corta',
         'descripcion_larga',
+        'existencia',
         'image'
     ];
 
@@ -47,9 +48,13 @@ class Product extends Model
 
     public function existencia()
     {
-        return $this->inventarios->sum(function ($inventario) {
+        // Sumar el valor del campo 'existencia' con el total calculado a partir de los inventarios
+        $existenciaInicial = $this->existencia;
+        $existenciaInventarios = $this->inventarios->sum(function ($inventario) {
             return $inventario->movimiento === 'Entrada' ? $inventario->cantidad : -$inventario->cantidad;
         });
+
+        return $existenciaInicial + $existenciaInventarios;
     }
 
     public function cotizacion_producto()

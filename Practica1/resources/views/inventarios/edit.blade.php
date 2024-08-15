@@ -84,5 +84,16 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('inventarioForm').addEventListener('submit', function(event) {
+        const fechaEntrada = document.getElementById('fecha_entrada').value;
+        const fechaSalida = document.getElementById('fecha_salida').value;
+
+        if (fechaEntrada > fechaSalida) {
+            event.preventDefault();
+            alert('La fecha de entrada no puede ser posterior a la fecha de salida.');
+        }
+    });
+</script>
 
 @endsection

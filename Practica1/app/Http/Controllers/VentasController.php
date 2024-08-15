@@ -112,12 +112,10 @@ class VentasController extends Controller
             </style>
         </head>
         <body>
-            <div class="header">
+            <div>
                 <h1>VENTAS</h1>
             </div>
-            <div class="footer">
-                <p>© ' . date("Y") . ' Cotización</p>
-            </div>
+        
             <div class="content">';
 
         foreach ($ventas as $venta) {
@@ -320,6 +318,7 @@ class VentasController extends Controller
         $clientes = Clientes::all();
         $forma_pago = FormaPago::all();
 
+
         return view('ventas.create', compact('vendedores', 'products', 'clientes', 'forma_pago'));
     }
 
@@ -338,8 +337,8 @@ class VentasController extends Controller
             'productos.*.cantidad' => 'required|integer|min:1',
         ]);
 
-        $subtotal = $request->total - ($request->total * 0.16);
-        $iva = $request->total * 0.16;
+        $subtotal = $request->total / 1.16;
+        $iva = $request->total - $subtotal;
 
         $venta = Ventas::create([
             'id_clientes' => $request->id_clientes,
@@ -350,9 +349,6 @@ class VentasController extends Controller
             'iva' => $iva,
             'total' => $request->total,
         ]);
-
-
-
 
 
         foreach ($request->productos as $productoId => $productoData) {
@@ -366,7 +362,7 @@ class VentasController extends Controller
                 'id_productos' => $productoId,
                 'fecha_salida' => now(),
                 'movimiento' => 'Salida',
-                'motivo' => 'compra',
+                'motivo' => 'Venta',
                 'cantidad' => $productoData['cantidad'],
             ]);
         }
@@ -410,8 +406,8 @@ class VentasController extends Controller
             'productos.*.cantidad' => 'required|integer|min:1',
         ]);
 
-        $subtotal = $request->total - ($request->total * 0.16);
-        $iva = $request->total * 0.16;
+        $subtotal = $request->total / 1.16;
+        $iva = $request->total - $subtotal;
 
 
         $venta->update([

@@ -25,7 +25,6 @@ class StoreComprasRequest extends FormRequest
             'id_proveedores' => 'required|integer',
             'id_productos' => 'required|integer',
             'id_forma_pago' => 'required|integer',
-            'fecha_compra' => 'required|date',
             'cantidad' => 'required|integer',
             'precio' => 'required|numeric',
             'descuento' => 'required|numeric',

@@ -23,8 +23,8 @@ class StoreInventariosRequest extends FormRequest
     {
         return [
             'id_productos' => 'required|exists:products,id',
-            'fecha_entrada' => 'required|date',
-            'fecha_salida' => 'required|date',
+            'fecha_entrada' => 'nullable|date',
+            'fecha_salida' => 'nullable|date',
             'motivo' => 'required|string',
             'movimiento' => 'required|string',
             'cantidad' => 'required|numeric|min:0'

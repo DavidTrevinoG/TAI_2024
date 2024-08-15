@@ -105,11 +105,8 @@ class ComprasController extends Controller
             </style>
         </head>
         <body>
-            <div class="header">
+            <div>
                 <h1>COMPRAS</h1>
-            </div>
-            <div class="footer">
-                <p>© ' . date("Y") . ' Todas las Compras</p>
             </div>
             <div class="content">';
 
@@ -180,10 +177,14 @@ class ComprasController extends Controller
      * Store a newly created resource in storage.
      */
 
-    // Función para guardar la nueva categoría
     public function store(StoreComprasRequest $request): RedirectResponse
     {
-        Compras::create($request->validated());
+        $compra = Compras::create($request->validated());
+
+        $producto = Product::find($request->id_productos);
+        $producto->precio_compra = $compra->precio;
+        $producto->precio_venta = $compra->precio * 1.20;
+        $producto->save();
 
         Inventarios::create([
             'id_productos' => $request->id_productos,

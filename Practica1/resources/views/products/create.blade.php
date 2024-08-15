@@ -83,8 +83,16 @@
                     </div>
 
                     <div class="mb-4">
+                        <label for="existencia" class="block text-sm font-medium text-gray-700">Existencia</label>
+                        <input type="number" class="form-textarea mt-1 block w-full rounded-md border-gray-300 @error('existencia') border-red-500 @enderror" id="existencia" name="existencia">{{ old('existencia') }}</>
+                        @error('existencia')
+                        <span class="text-red-500 text-sm">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mb-4">
                         <label for="image" class="block text-sm font-medium text-gray-700">Imagen</label>
-                        <input type="file" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('color') border-red-500 @enderror" id=" image" name="image">{{ old('image') }}</>
+                        <input type="file" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('color') border-red-500 @enderror" id=" image" name="image">{{ old('image') }}</s>
                         @error('image')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror

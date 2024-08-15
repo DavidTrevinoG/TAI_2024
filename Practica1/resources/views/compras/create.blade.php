@@ -28,8 +28,9 @@
                     <div class="mb-4">
                         <label for="id_productos" class="block text-sm font-medium text-gray-700">Producto</label>
                         <select id="id_productos" name="id_productos" class="form-select mt-1 block w-full rounded-md border-gray-300 @error('id_productos') border-red-500 @enderror">
+                            <option value="" disabled selected>Seleccione un producto</option>
                             @foreach($productos as $producto)
-                            <option value="{{ $producto->id }}">{{ $producto->nombre }}</option>
+                            <option value="{{ $producto->id }}" data-precio="{{ $producto->precio_compra }}">{{ $producto->nombre }}</option>
                             @endforeach
                         </select>
                         @error('id_productos')
@@ -48,13 +49,6 @@
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="fecha_compra" class="block text-sm font-medium text-gray-700">Fecha de Compra</label>
-                        <input type="date" id="fecha_compra" name="fecha_compra" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('fecha_compra') border-red-500 @enderror">
-                        @error('fecha_compra')
-                        <span class="text-red-500 text-sm">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="mb-4">
                         <label for="cantidad" class="block text-sm font-medium text-gray-700">Cantidad</label>
                         <input type="number" id="cantidad" name="cantidad" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('cantidad') border-red-500 @enderror">
                         @error('cantidad')
@@ -63,21 +57,21 @@
                     </div>
                     <div class="mb-4">
                         <label for="precio" class="block text-sm font-medium text-gray-700">Precio</label>
-                        <input type="number" id="precio" name="precio" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('precio') border-red-500 @enderror">
+                        <input type="number" id="precio" name="precio" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('precio') border-red-500 @enderror" placeholder="Selecciona un producto">
                         @error('precio')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
-                        <label for="descuento" class="block text-sm font-medium text-gray-700">Descuento</label>
-                        <input type="number" id="descuento" name="descuento" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('descuento') border-red-500 @enderror">
+                        <label for="descuento" class="block text-sm font-medium text-gray-700">Descuento (%)</label>
+                        <input type="number" id="descuento" name="descuento" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('descuento') border-red-500 @enderror" value="0">
                         @error('descuento')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="mb-4">
                         <label for="total" class="block text-sm font-medium text-gray-700">Total</label>
-                        <input type="number" id="total" name="total" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('total') border-red-500 @enderror">
+                        <input type="number" id="total" name="total" class="form-input mt-1 block w-full rounded-md border-gray-300 @error('total') border-red-500 @enderror" readonly>
                         @error('total')
                         <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
@@ -93,6 +87,37 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const cantidadInput = document.getElementById('cantidad');
+        const precioInput = document.getElementById('precio');
+        const descuentoInput = document.getElementById('descuento');
+        const totalInput = document.getElementById('total');
+        const productoSelect = document.getElementById('id_productos');
+
+        function calcularTotal() {
+            const cantidad = parseFloat(cantidadInput.value) || 0;
+            const precio = parseFloat(precioInput.value) || 0;
+            const descuento = parseFloat(descuentoInput.value) || 0;
+
+            const subtotal = cantidad * precio;
+            const descuentoAplicado = subtotal * (descuento / 100);
+            const total = subtotal - descuentoAplicado;
+
+            totalInput.value = total.toFixed(2); // Redondea a dos decimales
+        }
+
+        // Actualizar el precio cuando se seleccione un producto
+        productoSelect.addEventListener('change', function() {
+            const selectedOption = this.options[this.selectedIndex];
+            const precioCompra = selectedOption.getAttribute('data-precio');
+            precioInput.placeholder = precioCompra;
+            precioInput.value = precioCompra; // También puedes poner el precio directamente en el campo si es necesario
+            calcularTotal();
+        });
+
+        cantidadInput.addEventListener('input', calcularTotal);
+        precioInput.addEventListener('input', calcularTotal);
+        descuentoInput.addEventListener('input', calcularTotal);
+
         const form = document.getElementById('comprasForm');
         const submitButton = document.getElementById('submitButton');
 

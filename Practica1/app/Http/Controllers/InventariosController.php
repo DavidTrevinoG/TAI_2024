@@ -178,8 +178,6 @@ class InventariosController extends Controller
     {
         Inventarios::create($request->validated());
 
-
-
         return redirect()->route('inventarios.index')
             ->withSuccess('Nueva inventario');
     }

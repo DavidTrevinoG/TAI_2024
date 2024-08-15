@@ -14,7 +14,6 @@ class Compras extends Model
         'id_proveedores',
         'id_productos',
         'id_forma_pago',
-        'fecha_compra',
         'cantidad',
         'precio',
         'descuento',

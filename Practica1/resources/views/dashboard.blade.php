@@ -8,6 +8,11 @@
 
             <!-- Contenedor de Gráficas -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gráfica 1: Existencia de Productos -->
+                <div class="bg-gray-700 p-6 rounded-lg" style="height: 500px;">
+                    <h3 class="text-xl font-semibold mb-4">Existencia de Productos</h3>
+                    <canvas id="productStockChart"></canvas>
+                </div>
                 <!-- Gráfica 1: Ventas mensuales -->
                 <div class="bg-gray-700 p-6 rounded-lg" style="height: 500px;">
                     <h3 class="text-xl font-semibold mb-4">Ventas Mensuales</h3>
@@ -35,6 +40,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        // Datos dinámicos de PHP a JavaScript
+        const existenciaProductos = <?php echo json_encode($existenciaProductos); ?>;
+        const ventasMensuales = <?php echo json_encode($ventasMensuales); ?>;
+        const productosMasVendidos = <?php echo json_encode($productosMasVendidos); ?>;
+        const clientesRecurrentes = <?php echo json_encode($clientesRecurrentes); ?>;
+
         // Opciones comunes para las gráficas
         const commonOptions = {
             responsive: true,
@@ -46,15 +57,44 @@
             }
         };
 
+        // Gráfica de Existencia de Productos
+        var ctx1 = document.getElementById('productStockChart').getContext('2d');
+        var productStockChart = new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(existenciaProductos),
+                datasets: [{
+                    label: 'Existencia de Productos',
+                    data: Object.values(existenciaProductos),
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: commonOptions
+        });
+
         // Gráfica de Ventas Mensuales
         var ctx1 = document.getElementById('monthlySalesChart').getContext('2d');
         var monthlySalesChart = new Chart(ctx1, {
             type: 'line',
             data: {
-                labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+                labels: Object.keys(ventasMensuales).map(mes => `Mes ${mes}`),
                 datasets: [{
                     label: 'Ventas Mensuales',
-                    data: [1200, 1900, 3000, 5000, 2400, 3200, 4100, 3700, 4800, 5200, 6100, 7000],
+                    data: Object.values(ventasMensuales),
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
@@ -68,10 +108,10 @@
         var topProductsChart = new Chart(ctx2, {
             type: 'bar',
             data: {
-                labels: ['Producto A', 'Producto B', 'Producto C', 'Producto D', 'Producto E'],
+                labels: Object.keys(productosMasVendidos),
                 datasets: [{
                     label: 'Cantidad Vendida',
-                    data: [50, 75, 30, 85, 60],
+                    data: Object.values(productosMasVendidos),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -97,10 +137,10 @@
         var recurrentCustomersChart = new Chart(ctx3, {
             type: 'pie',
             data: {
-                labels: ['Cliente A', 'Cliente B', 'Cliente C', 'Cliente D'],
+                labels: Object.keys(clientesRecurrentes),
                 datasets: [{
                     label: 'Clientes Recurrentes',
-                    data: [10, 20, 30, 40],
+                    data: Object.values(clientesRecurrentes),
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

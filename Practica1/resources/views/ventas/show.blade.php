@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="fecha_venta" class="block text-sm font-medium text-gray-700"><strong>Fecha de Venta:</strong></label>
-                        <p class="mt-1">{{ $venta->fecha_venta }}</p>
+                        <p class="mt-1">{{ date('d-m-Y', strtotime($venta->created_at))  }}</p>
                     </div>
                     <div class="col-span-2 sm:col-span-1">
                         <label for="forma_pago" class="block text-sm font-medium text-gray-700"><strong>Forma de Pago:</strong></label>
@@ -58,8 +58,8 @@
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imagen</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Producto</th>
                             <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Cantidad</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio</th>
-                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subtotal</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Unitario</th>
+                            <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Total</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">

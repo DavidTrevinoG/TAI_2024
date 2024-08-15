@@ -144,6 +144,7 @@ class CotizacionesController extends Controller
 
         $subtotal = $total / 1.16; // Se calcula el subtotal sin IVA
         $iva = $total - $subtotal; // Se calcula el IVA
+
         $html .= '
                     </tbody>
                 </table>
@@ -176,6 +177,17 @@ class CotizacionesController extends Controller
     {
         $search = $request->input('search');
         $productos = Product::where('nombre', 'like', "%{$search}%")->get();
+
+        $productos = $productos->map(function ($producto) {
+            return [
+                'id' => $producto->id,
+                'nombre' => $producto->nombre,
+                'precio_venta' => $producto->precio_venta,
+                'existencia' => $producto->existencia(),
+                'image' => $producto->image
+            ];
+        });
+
         return response()->json($productos);
     }
 

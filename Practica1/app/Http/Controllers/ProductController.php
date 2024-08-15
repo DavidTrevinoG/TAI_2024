@@ -25,7 +25,267 @@ class ProductController extends Controller
         ]);
     }
 
+    public function pdfStock()
+    {
+        $productos = Product::all();
+        $pdf = app('dompdf.wrapper');
 
+        $html = '
+        <html>
+        <head>
+            <style>
+    @font-face {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        src: url("Roboto-Regular.ttf") format("truetype");
+    }
+    body {
+        font-family: "Roboto", sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #0101f2;
+    }
+    .header, .footer {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+    }
+    .header {
+        top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .footer {
+        bottom: 0px;
+        font-size: 12px;
+        color: #777;
+    }
+    .content {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .details div {
+        width: 48%;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    .table, .table th, .table td {
+        border: 1px solid #ddd;
+    }
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+    }
+    .table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        color: #333;
+    }
+    .table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .total {
+        text-align: right;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+
+        </head>
+        <body>
+            <div>
+                <h1>Stock de Productos</h1>
+            </div>
+            <div class="content">';
+
+
+        $html .= '
+            <table id="Table" class="table min-w-full divide-y divide-gray-200">
+                        <!-- Encabezados de la tabla -->
+                        <thead>
+                            <tr>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Existencia</th>
+
+                            </tr>
+                        </thead>
+                        <!-- Cuerpo de la tabla -->
+                        <tbody class=" divide-y divide-gray-200">
+            ';
+        foreach ($productos as $pr) {
+            $html .= '
+                            <tr>
+                                <td class="px-6 py-4 "> ' . $pr->id . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->nombre . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->existencia() . '</td>
+                                
+                            </tr>';
+        }
+
+        $html .= '
+                        </tbody>
+                    </table>';
+
+
+        $html .= '
+            </div>
+        </body>
+        </html>';
+
+        $pdf->loadHTML($html);
+
+        return $pdf->download('stock_productos_' . date("Y-m-d") . '.pdf');
+    }
+
+
+    public function pdfAll()
+    {
+        $productos = Product::all();
+        $pdf = app('dompdf.wrapper');
+
+        $html = '
+        <html>
+        <head>
+            <style>
+    @font-face {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: 400;
+        src: url("Roboto-Regular.ttf") format("truetype");
+    }
+    body {
+        font-family: "Roboto", sans-serif;
+        margin: 20px;
+    }
+    h1 {
+        text-align: center;
+        color: #0101f2;
+    }
+    .header, .footer {
+        width: 100%;
+        text-align: center;
+        position: fixed;
+    }
+    .header {
+        top: 0px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .footer {
+        bottom: 0px;
+        font-size: 12px;
+        color: #777;
+    }
+    .content {
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+    .details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .details div {
+        width: 48%;
+    }
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+    }
+    .table, .table th, .table td {
+        border: 1px solid #ddd;
+    }
+    .table th, .table td {
+        padding: 12px;
+        text-align: left;
+    }
+    .table th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        color: #333;
+    }
+    .table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .total {
+        text-align: right;
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+
+        </head>
+        <body>
+            <div>
+                <h1>Productos</h1>
+            </div>
+            <div class="content">';
+
+
+        $html .= '
+            <table id="Table" class="table min-w-full divide-y divide-gray-200">
+                        <!-- Encabezados de la tabla -->
+                        <thead>
+                            <tr>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Categoría</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Venta</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Precio Compra</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+                                <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Color</th>
+                            </tr>
+                        </thead>
+                        <!-- Cuerpo de la tabla -->
+                        <tbody class=" divide-y divide-gray-200">
+            ';
+        foreach ($productos as $pr) {
+            $html .= '
+                            <tr>
+                                <td class="px-6 py-4 "> ' . $pr->id . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->nombre . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->category->nombre . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->precio_venta . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->precio_compra . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->fecha_compra . '</td>
+                                <td class="px-6 py-4 "> ' . $pr->color . '</td>
+                                
+                            </tr>';
+        }
+
+        $html .= '
+                        </tbody>
+                    </table>';
+
+
+        $html .= '
+            </div>
+        </body>
+        </html>';
+
+        $pdf->loadHTML($html);
+
+        return $pdf->download('productos_' . date("Y-m-d") . '.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -54,6 +314,7 @@ class ProductController extends Controller
             'color' => 'nullable|string|max:255',
             'descripcion_corta' => 'nullable|string',
             'descripcion_larga' => 'nullable|string',
+            'existencia' => 'required|numeric',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
         ]);
 

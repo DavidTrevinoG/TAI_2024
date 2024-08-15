@@ -66,9 +66,9 @@
                         <div class="flex justify-end">
                             <h3 class="text-xl font-semibold mb-4">Costos</h3>
                             <br><br>
-                            Subtotal (sin IVA): {{ '$'.number_format($subtotal - $subtotal * 0.16, 2) }}
+                            Subtotal (sin IVA): {{ '$'.number_format($total/1.16, 2) }}
                             <br>
-                            IVA (16%): {{ '$'.number_format($subtotal * 0.16, 2) }}
+                            IVA (16%): {{ '$'.number_format($total - ($total/1.16), 2) }}
                             <br>
                             Total (con IVA): {{ '$'.number_format($total, 2) }}
                         </div>
